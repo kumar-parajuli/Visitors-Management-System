@@ -1,4 +1,4 @@
-<section class="container">
+<section class="container" [ngClass]="{ 'form-shadow': addForm.touched }">
   <header>Add Manager</header>
 
   <form class="form" (ngSubmit)="onFormSubmitted()" #addForm="ngForm">
@@ -9,30 +9,70 @@
         name="firstname"
         ngModel
         required
-        #fname=""
-        ngModel
+        #fname="ngModel"
       />
+      <div>
+        <small *ngIf="fname.invalid && fname.touched"
+          >*First Name is a Required Field</small
+        >
+        <!-- <span *ngIf="firstName">You Enter:{{ firstName }}</span> -->
+      </div>
     </div>
 
     <div class="input-box">
       <input
         type="text"
         placeholder="Last Name"
-        ngModel
-        #fname=""
+        name="lastname"
         ngModel
         required
+        #lname="ngModel"
       />
+      <div>
+        <small *ngIf="lname.invalid && lname.touched"
+          >*Last Name is a Required Field</small
+        >
+        <!-- <span *ngIf="lastName">You Enter:{{ lastName }}</span> -->
+      </div>
+    </div>
+
+    <div class="input-box">
+      <input
+        type="text"
+        placeholder="Email"
+        name="email"
+        ngModel
+        required
+        email
+        #email="ngModel"
+        pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+      />
+      <div>
+        <small *ngIf="email.invalid && email.touched">
+          *Entered Email is not valid
+        </small>
+        <small *ngIf="email.hasError('pattern') && email.touched">
+          *Please enter a valid email address !
+        </small>
+        <!-- <span *ngIf="emailAddress">You entered: {{ emailAddress }}</span> -->
+      </div>
     </div>
 
     <div class="input-box">
       <input
         type="text"
         placeholder="Address"
-        name="lastname"
-        required
+        name="address"
+        #aname="ngModel"
         ngModel
+        required
       />
+      <div>
+        <small *ngIf="aname.invalid && aname.touched"
+          >*Address is a Required Field</small
+        >
+        <!-- <span *ngIf="address">You Enter:{{ address }}</span> -->
+      </div>
     </div>
 
     <div class="column">
@@ -40,9 +80,31 @@
         <input
           type="number"
           placeholder="Phone Number"
-          name="pnomenumber"
+          name="phonenumber"
+          ngModel
+          #pname="ngModel"
+          required
+          pattern="^(\+977-?)?9\d{9}$"
+        />
+        <div>
+          <small *ngIf="pname.invalid && pname.touched">
+            *Phone is a Required Field and should be a valid Nepali phone number
+          </small>
+          <small *ngIf="pname.hasError('pattern') && pname.touched">
+            *Please enter a valid Nepali phone number with or without the
+            country code (+977)
+          </small>
+        </div>
+      </div>
+      <div class="input-box">
+        <input
+          type="date"
+          placeholder="Date of Birth"
+          name="dob"
           ngModel
           required
+          #tempdob="ngModel"
+          max="{{ getMaxDate() }}"
         />
       </div>
     </div>
@@ -56,9 +118,9 @@
             [id]="gen.id"
             [value]="gen.value"
             name="gender"
-            ngModel
-            required
+            [ngModel]="defaultGender"
           />
+
           <label for="check-male">{{ gen.display }}</label>
         </div>
         <!-- <div class="gender">
@@ -76,7 +138,43 @@
           <label for="check-other">prefer not to say</label>
         </div> -->
       </div>
+      <!-- <div>
+        <small *ngIf="gname.valid && gname.touched"
+          >*Gender is a Required Field</small
+        >
+      </div> -->
     </div>
-    <input type="submit" value="Add Manager" class="submit-btn" />
+    <input
+      type="submit"
+      value="Add Manager"
+      class="submit-btn"
+      [disabled]="!addForm.valid"
+    />
   </form>
+</section>
+<section class="user-detail-container">
+  <div class="user-details-container">
+    <div class="user-avatar">
+      <p>
+        DU
+        <!-- {{ firstName.slice(0, 1).toUpperCase()
+        }}{{ lastName.slice(0, 1).toUpperCase() }} -->
+      </p>
+    </div>
+    <div class="user-details">
+      <div class="user-name">
+        <h2>{{ firstName }} {{ lastName }}</h2>
+      </div>
+      <p><b>Username:</b> {{ firstName }} {{ lastName }}</p>
+      <p><b>Email:</b> {{ emailAddress }}</p>
+      <p><b>PhoneNo:</b>{{ phoneNumber }}</p>
+      <p><b>Date of birth:</b> {{ dob }}</p>
+      <p><b>Gender:</b> {{ gender }}</p>
+
+      <div class="user-name">
+        <h3>Address:{{ address }}</h3>
+      </div>
+      <span class="footer">&copy; 2024 Kumar Parajuli. All rights reserved.</span>.
+    </div>
+  </div>
 </section>
