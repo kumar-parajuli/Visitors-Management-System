@@ -1,0 +1,82 @@
+<section class="container">
+  <header>Add Manager</header>
+
+  <form class="form" (ngSubmit)="onFormSubmitted()" #addForm="ngForm">
+    <div class="input-box">
+      <input
+        type="text"
+        placeholder="First Name"
+        name="firstname"
+        ngModel
+        required
+        #fname=""
+        ngModel
+      />
+    </div>
+
+    <div class="input-box">
+      <input
+        type="text"
+        placeholder="Last Name"
+        ngModel
+        #fname=""
+        ngModel
+        required
+      />
+    </div>
+
+    <div class="input-box">
+      <input
+        type="text"
+        placeholder="Address"
+        name="lastname"
+        required
+        ngModel
+      />
+    </div>
+
+    <div class="column">
+      <div class="input-box">
+        <input
+          type="number"
+          placeholder="Phone Number"
+          name="pnomenumber"
+          ngModel
+          required
+        />
+      </div>
+    </div>
+
+    <div class="gender-box">
+      <h3>Gender</h3>
+      <div class="gender-option">
+        <div class="gender" *ngFor="let gen of genders">
+          <input
+            type="radio"
+            [id]="gen.id"
+            [value]="gen.value"
+            name="gender"
+            ngModel
+            required
+          />
+          <label for="check-male">{{ gen.display }}</label>
+        </div>
+        <!-- <div class="gender">
+          <input
+            type="radio"
+            id="check-female"
+            name="gender"
+            ngModel
+            required
+          />
+          <label for="check-female">Female</label>
+        </div>
+        <div class="gender">
+          <input type="radio" id="check-other" name="gender" ngModel required />
+          <label for="check-other">prefer not to say</label>
+        </div> -->
+      </div>
+    </div>
+    <input type="submit" value="Add Manager" class="submit-btn" />
+  </form>
+</section>
