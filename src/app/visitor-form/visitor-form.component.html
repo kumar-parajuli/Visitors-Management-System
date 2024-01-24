@@ -1,0 +1,115 @@
+<!-- visitor.component.html -->
+<section class="container" [ngClass]="{ 'form-shadow': addVisitor.touched }">
+  <header>Add Visitor</header>
+
+  <form class="form" (ngSubmit)="onFormSubmitted()" #addVisitor="ngForm">
+    <div class="input-box">
+      <input
+        type="text"
+        placeholder="First Name"
+        name="firstname"
+        ngModel
+        required
+        #fname="ngModel"
+      />
+      <div>
+        <small *ngIf="fname.invalid && fname.touched"
+          >*First Name is a Required Field</small
+        >
+      </div>
+    </div>
+
+    <div class="input-box">
+      <input
+        type="text"
+        placeholder="Last Name"
+        name="lastname"
+        ngModel
+        required
+        #lname="ngModel"
+      />
+      <div>
+        <small *ngIf="lname.invalid && lname.touched"
+          >*Last Name is a Required Field</small
+        >
+      </div>
+    </div>
+    <div class="input-box">
+      <input
+        type="text"
+        placeholder="Address"
+        name="address"
+        #aname="ngModel"
+        ngModel
+        required
+      />
+      <div>
+        <small *ngIf="aname.invalid && aname.touched"
+          >*Address is a Required Field</small
+        >
+        <!-- <span *ngIf="address">You Enter:{{ address }}</span> -->
+      </div>
+    </div>
+
+    <div class="column">
+      <div class="input-box">
+        <input
+          type="number"
+          placeholder="Phone Number"
+          name="phonenumber"
+          ngModel
+          #pname="ngModel"
+          required
+          pattern="^(\+977-?)?9\d{9}$"
+        />
+      </div>
+      <div>
+        <small *ngIf="pname.invalid && pname.touched">
+          *Phone is a Required Field
+        </small>
+        <small *ngIf="pname.hasError('pattern') && pname.touched">
+          *Please enter a valid Nepali phone number with or without the country
+          code (+977)
+        </small>
+      </div>
+      </div>
+      <div class="gender-box">
+        <h3>Gender</h3>
+        <div class="gender-option">
+          <div class="gender" *ngFor="let gen of genders">
+            <input
+              type="radio"
+              [id]="gen.id"
+              [value]="gen.value"
+              name="gender"
+              [ngModel]="defaultGender"
+            />
+
+            <label for="check-male">{{ gen.display }}</label>
+        </div>
+      </div>
+
+      <!-- <textarea class="input-box">
+      <textarea
+        placeholder="Remarks"
+        name="remarks"
+        ngModel
+        #remarks="ngModel"
+        required
+      ></textarea
+      > -->
+      <!-- <div>
+        <small *ngIf="remarks.invalid && remarks.touched"
+          >*Remarks is a Required Field</small
+        >
+      </div> -->
+    </div>
+
+    <input
+      type="submit"
+      value="Add Visitor"
+      class="submit-btn"
+      [disabled]="!addVisitor.valid"
+    />
+  </form>
+</section>

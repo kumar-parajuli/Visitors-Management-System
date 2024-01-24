@@ -88,7 +88,7 @@
         />
         <div>
           <small *ngIf="pname.invalid && pname.touched">
-            *Phone is a Required Field and should be a valid Nepali phone number
+            *Phone is a Required Field
           </small>
           <small *ngIf="pname.hasError('pattern') && pname.touched">
             *Please enter a valid Nepali phone number with or without the
@@ -174,7 +174,9 @@
       <div class="user-name">
         <h3>Address:{{ address }}</h3>
       </div>
-      <span class="footer">&copy; 2024 Kumar Parajuli. All rights reserved.</span>.
+      <span class="footer"
+        >&copy; 2024 Kumar Parajuli. All rights reserved.</span
+      >.
     </div>
   </div>
 </section>
