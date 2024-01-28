@@ -7,9 +7,10 @@ import { ManagerListComponent } from './manager-list/manager-list.component';
 import { FormsModule } from '@angular/forms';
 import { VisitorFormComponent } from './visitor-form/visitor-form.component';
 import { MeetingDetailsComponent } from './meeting-details/meeting-details.component';
+import { BookAppointmentsComponent } from './book-appointments/book-appointments.component';
 
 @NgModule({
-  declarations: [AppComponent, ManagerListComponent, VisitorFormComponent, MeetingDetailsComponent],
+  declarations: [AppComponent, ManagerListComponent, VisitorFormComponent, MeetingDetailsComponent, BookAppointmentsComponent],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],

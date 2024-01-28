@@ -35,4 +35,11 @@ export class VisitorFormComponent {
       gender: 'male',
     });
   }
+  editMeeting() {
+    console.log('Edit meeting clicked');
+  }
+
+  deleteMeeting() {
+    console.log('Delete meeting clicked');
+  }
 }

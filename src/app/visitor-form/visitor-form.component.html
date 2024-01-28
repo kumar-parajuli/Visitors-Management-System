@@ -89,20 +89,7 @@
         </div>
       </div>
 
-      <!-- <textarea class="input-box">
-      <textarea
-        placeholder="Remarks"
-        name="remarks"
-        ngModel
-        #remarks="ngModel"
-        required
-      ></textarea
-      > -->
-      <!-- <div>
-        <small *ngIf="remarks.invalid && remarks.touched"
-          >*Remarks is a Required Field</small
-        >
-      </div> -->
+      
     </div>
 
     <input
@@ -112,4 +99,34 @@
       [disabled]="!addVisitor.valid"
     />
   </form>
+</section>
+<section class="user-detail-container">
+  <div class="user-details-container">
+    <div class="user-avatar">
+      <p>
+        
+        {{ firstName.slice(0, 1).toUpperCase()
+        }}{{ lastName.slice(0, 1).toUpperCase() }}
+      </p>
+    </div>
+    <div class="user-details">
+      <div class="user-name">
+        <h2>{{ firstName }} {{ lastName }}</h2>
+      </div>
+      <p><b>Username:</b> {{ firstName }} {{ lastName }}</p>
+      <p><b>PhoneNo:</b>{{ phoneNumber }}</p>
+      <p><b>Gender:</b> {{ gender }}</p>
+
+      <div class="user-name">
+        <h3>Address:{{ address }}</h3>
+      </div>
+      <div class="user-edit">
+        <button class="edit-button" (click)="editMeeting()">Edit</button>
+        <span class="footer"
+        >&copy; 2024. All rights reserved.</span
+      >
+        <button class="delete-button" (click)="deleteMeeting()">Delete</button>
+      </div>
+    </div>
+  </div>
 </section>

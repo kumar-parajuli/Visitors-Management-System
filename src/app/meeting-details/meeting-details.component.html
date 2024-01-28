@@ -1,26 +1,101 @@
-<section class="container">
+<section class="container" [ngClass]="{ 'form-shadow': addMeeting.touched }">
   <header>Meeting Details Form</header>
 
-  <form class="form">
+  <form class="form" (ngSubmit)="onFormSubmitted()" #addMeeting="ngForm">
     <div class="input-box">
       <label for="managerId">Manager ID:</label>
 
-      <input type="text" id="managerId" name="managerId" required />
+      <input
+        type="text"
+        id="managerId"
+        name="managerId"
+        ngModel
+        required
+        #mname="ngModel"
+      />
+      <div>
+        <small *ngIf="mname.invalid && mname.touched"
+          >* Must Enter Manager Id is a Required Field!
+        </small>
+      </div>
     </div>
     <div class="input-box">
       <label for="visitorId">Visitor ID:</label>
-      <input type="text" id="visitorId" name="visitorId" required />
+      <input
+        type="text"
+        id="visitorId"
+        name="visitorId"
+        ngModel
+        required
+        #vname="ngModel"
+      />
+      <div>
+        <small *ngIf="vname.invalid && vname.touched"
+          >* Must Enter Visitor Id is a Required Field!
+        </small>
+      </div>
     </div>
 
     <div class="input-box">
       <label for="appointmentDate">Appointment Date:</label>
-      <input type="date" id="appointmentDate" name="appointmentDate" required />
+      <input
+        type="date"
+        id="appointmentDate"
+        name="appointmentDate"
+        ngModel
+        required
+        #aname="ngModel"
+      />
+      <div>
+        <small *ngIf="aname.invalid && aname.touched">
+          *Appointment Date is a Required Field!
+        </small>
+      </div>
     </div>
     <div class="input-box">
       <label for="remarks">Remarks:</label>
-      <textarea class="textarea" id="remarks" name="remarks" rows="4" cols="50"></textarea>
+      <textarea
+        class="textarea"
+        id="remarks"
+        name="remarks"
+        rows="4"
+        cols="50"
+        ngModel
+        required
+        #rname="ngModel"
+      ></textarea>
+      <div>
+        <small *ngIf="rname.invalid && rname.touched"
+          >* Remarks is a Required Field!
+        </small>
+      </div>
     </div>
 
     <button type="submit" class="submit-btn">Submit</button>
   </form>
+</section>
+
+<!-- ///retrive the data from the form -->
+<section class="user-detail-container">
+  <div class="user-details-container">
+    <div class="user-avatar">
+      <p>MD</p>
+    </div>
+    <div class="user-details">
+      <div class="user-name">
+        <h2>Meeting Details</h2>
+      </div>
+      <p><b>ManagerId:</b> {{ ManagerId }}</p>
+      <p><b>VisitorId:</b> {{ VisitorId }}</p>
+      <p><b>Remarks:</b>{{ Remarks }}</p>
+      <div class="user-name">
+        <h3>AppointmentDate:{{ appointmentDate }}</h3>
+      </div>
+      <div class="user-edit">
+        <button class="edit-button" (click)="editMeeting()">Edit</button>
+        <span class="footer">&copy; 2024. All rights reserved.</span>
+        <button class="delete-button" (click)="deleteMeeting()">Delete</button>
+      </div>
+    </div>
+  </div>
 </section>

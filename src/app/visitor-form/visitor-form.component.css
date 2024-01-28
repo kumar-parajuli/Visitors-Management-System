@@ -170,3 +170,25 @@ span.footer {
   font-weight: bold;
   color: #c9c2c9;
 }
+/* Assuming you have styles for .user-edit somewhere else in your CSS */
+.user-edit {
+  display: flex; /* Use flexbox to align items in one line */
+  gap: 10px; /* Adjust the gap between buttons */
+}
+
+/* Styling for the buttons */
+.edit-button,
+.delete-button {
+  padding: 10px; /* Add padding for better visual appearance */
+  background-color: #d9381e; /* Example background color */
+  color: #c9c2c2; /* Example text color */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Hover effect for buttons */
+.edit-button:hover,
+.delete-button:hover {
+  background-color: #2980b9; /* Example hover background color */
+}

@@ -1,17 +1,28 @@
-<section>
-  <div class="header">
-    <h1>Welcome to {{ title }}</h1>
-  </div>
-  <!-- <form style="text-align: center">
-    <input type="text" placeholder="Filter by city" />
-    <button class="primary" type="button">Search</button>
-    <br />
-    <h2>Parent component</h2>
-    Parent Component: <input type="text" #Pcomponent (keyup)="(0)" />
-  </form> -->
-  <!-- <app-employee></app-employee> -->
-  <!-- <app-employee [Pdata]="Pcomponent.value"></app-employee> -->
-  <app-manager-list></app-manager-list>
+<!-- <div class="header">
+  <h1>Welcome to {{ title }}</h1>
+</div> -->
+<div>
+  <nav>
+    <ul>
+      <li>
+        <a routerLink="/manager-list" routerLinkActive="active">Manager </a>
+      </li>
+      <li>
+        <a routerLink="/visitor-form" routerLinkActive="active">Visitor </a>
+      </li>
+      <li>
+        <a routerLink="/meeting-details" routerLinkActive="active">Meeting </a>
+      </li>
+      <li>
+        <a routerLink="/book-appointments" routerLinkActive="active"
+          >Book Appointment
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+<!-- <app-manager-list></app-manager-list>
   <app-visitor-form></app-visitor-form>
-  <app-meeting-details></app-meeting-details>
-</section>
+  <app-meeting-details></app-meeting-details> -->
+
+<router-outlet></router-outlet>

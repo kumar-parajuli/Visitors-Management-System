@@ -1,17 +1,58 @@
-.container {
+/* .container {
   position: relative;
   max-width: 700px;
   width: 100%;
   /* border: #333; */
-  margin-top: 3rem;
+/* margin-top: 3rem;
   background: #fff;
   padding: 20px 50px;
   border-radius: 8px;
-}
+} */
 
-header {
+/* header {
   font-size: 1.5rem;
   color: #c9c2c2;
   font-weight: 500;
   text-align: center;
+} */
+
+body {
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+nav ul li {
+  display: inline;
+  margin-right: 10px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #c9c2c2;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+nav a.active {
+  background-color: #555;
+  color: #fff;
+}
+
+/* Style for router-outlet (assuming it's a container for your dynamic components) */
+router-outlet {
+  padding: 20px;
 }

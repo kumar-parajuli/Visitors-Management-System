@@ -49,4 +49,11 @@ export class ManagerListComponent {
     const today = new Date();
     return today.toISOString().split('T')[0];
   }
+  editMeeting() {
+    console.log('Edit meeting clicked');
+  }
+
+  deleteMeeting() {
+    console.log('Delete meeting clicked');
+  }
 }

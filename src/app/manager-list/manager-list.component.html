@@ -123,26 +123,7 @@
 
           <label for="check-male">{{ gen.display }}</label>
         </div>
-        <!-- <div class="gender">
-          <input
-            type="radio"
-            id="check-female"
-            name="gender"
-            ngModel
-            required
-          />
-          <label for="check-female">Female</label>
-        </div>
-        <div class="gender">
-          <input type="radio" id="check-other" name="gender" ngModel required />
-          <label for="check-other">prefer not to say</label>
-        </div> -->
       </div>
-      <!-- <div>
-        <small *ngIf="gname.valid && gname.touched"
-          >*Gender is a Required Field</small
-        >
-      </div> -->
     </div>
     <input
       type="submit"
@@ -156,9 +137,8 @@
   <div class="user-details-container">
     <div class="user-avatar">
       <p>
-        DU
-        <!-- {{ firstName.slice(0, 1).toUpperCase()
-        }}{{ lastName.slice(0, 1).toUpperCase() }} -->
+        {{ firstName.slice(0, 1).toUpperCase()
+        }}{{ lastName.slice(0, 1).toUpperCase() }}
       </p>
     </div>
     <div class="user-details">
@@ -174,9 +154,11 @@
       <div class="user-name">
         <h3>Address:{{ address }}</h3>
       </div>
-      <span class="footer"
-        >&copy; 2024 Kumar Parajuli. All rights reserved.</span
-      >.
+      <div class="user-edit">
+        <button class="edit-button" (click)="editMeeting()">Edit</button>
+        <span class="footer">&copy; 2024. All rights reserved.</span>
+        <button class="delete-button" (click)="deleteMeeting()">Delete</button>
+      </div>
     </div>
   </div>
 </section>
