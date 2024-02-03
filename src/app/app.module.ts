@@ -9,19 +9,13 @@ import { FormsModule } from '@angular/forms';
 import { VisitorFormComponent } from './visitor-form/visitor-form.component';
 import { MeetingDetailsComponent } from './meeting-details/meeting-details.component';
 import { BookAppointmentsComponent } from './book-appointments/book-appointments.component';
-import { ManagerService } from "./services/manager.service";  // Adjust the path based on your actual folder structure
-import {VisitorService} from "./services/visitor.service";
-import {MeetingDetailsService} from "./services/meeting-details.service";
+import { ManagerService } from './services/manager.service'; // Adjust the path based on your actual folder structure
+import { VisitorService } from './services/visitor.service';
+import { MeetingDetailsService } from './services/meeting-details.service';
 import { BookingAppointmentService } from './services/booking-appointment.service';
 import { ManagerUpdateComponent } from './manager-update/manager-update.component';
 import { UpdateVisitorComponent } from './update-visitor/update-visitor.component';
 import { UpdateMeetingComponent } from './update-meeting/update-meeting.component';
-
-
-
-
-
-
 
 @NgModule({
   declarations: [

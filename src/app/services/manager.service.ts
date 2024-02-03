@@ -45,7 +45,6 @@ export class ManagerService {
       catchError(this.handleError)
     );
   }
-  
 
   deleteManager(managerId: string): Observable<void> {
     const url = `${this.apiUrl}/delete-manager/${managerId}`;

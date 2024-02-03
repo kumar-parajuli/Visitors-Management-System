@@ -25,7 +25,7 @@ export class MeetingDetailsComponent implements OnInit {
     { id: 'check-no', value: 'no', display: 'No' },
     { id: 'check-other', value: 'other', display: 'Prefer not to say' },
   ];
-  defaultbooking: string = 'yes';
+  booking: string = 'yes';
   constructor(
     private http: HttpClient,
     private router: Router,
@@ -84,7 +84,11 @@ export class MeetingDetailsComponent implements OnInit {
     this.managerId = '';
     this.visitorId = '';
     this.appointmentDate = '';
+    this.bookingAppointment = '';
     this.Remarks = '';
     this.form.reset();
+    this.form.form.patchValue({
+      booking: 'yes',
+    });
   }
 }

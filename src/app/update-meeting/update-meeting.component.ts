@@ -11,12 +11,12 @@ import { MeetingDetailsService } from '../services/meeting-details.service';
 export class UpdateMeetingComponent {
   meetingId: number;
   meetingDetails: any;
-  booking = [
+  bookings = [
     { id: 'check-yes', value: 'yes', display: 'Yes' },
     { id: 'check-no', value: 'no', display: 'No' },
     { id: 'check-other', value: 'other', display: 'Prefer not to say' },
   ];
-  defaultGender: string = 'yes';
+  defaultbooking: string = 'yes';
   constructor(
     private route: ActivatedRoute,
     private router: Router,

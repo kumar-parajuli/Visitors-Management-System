@@ -17,8 +17,10 @@ export class ManagerListComponent implements OnInit {
   email: string = '';
   address: string = '';
   phoneNumber: string = '';
+
   managers: any[] = []; // Declare the managers array
   manager: any; // Declare the manager property
+
   @ViewChild('addForm') form: NgForm;
   genders = [
     { id: 'check-male', value: 'male', display: 'Male' },
@@ -96,7 +98,7 @@ export class ManagerListComponent implements OnInit {
       gender: 'male',
     });
   }
-
+  
   getMaxDate(): string {
     const today = new Date();
     return today.toISOString().split('T')[0];

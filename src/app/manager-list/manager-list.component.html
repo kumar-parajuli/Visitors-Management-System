@@ -79,7 +79,7 @@
           [(ngModel)]="phoneNumber"
           #pname="ngModel"
           required
-          pattern="^(\+977-?)?9\d{9}$"
+          pattern="^(\+977)?9\d{9}$"
         />
         <div>
           <small *ngIf="pname.invalid && pname.touched">
