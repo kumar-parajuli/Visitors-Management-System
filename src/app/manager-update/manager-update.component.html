@@ -1,0 +1,41 @@
+<section class="container">
+  <header>Edit Manager</header>
+
+  <form class="form" (ngSubmit)="updateManager()" #updateForm="ngForm">
+    <div class="input-box">
+      <input type="text" placeholder="First Name" name="firstName" [(ngModel)]="manager.firstName" required />
+    </div>
+
+    <div class="input-box">
+      <input type="text" placeholder="Last Name" name="lastName" [(ngModel)]="manager.lastName" required />
+    </div>
+
+    <div class="input-box">
+      <input type="text" placeholder="Email" name="email" [(ngModel)]="manager.email" required />
+    </div>
+
+    <div class="input-box">
+      <input type="text" placeholder="Address" name="address" [(ngModel)]="manager.address" required />
+    </div>
+
+    <div class="column">
+      <div class="input-box">
+        <input type="number" placeholder="Phone Number" name="phoneNumber" [(ngModel)]="manager.phoneNumber" required />
+      </div>
+    </div>
+
+    <div class="gender-box">
+      <h3>Gender</h3>
+      <div class="gender-option">
+        <div class="gender" *ngFor="let gen of genders">
+          <input type="radio" [id]="gen.id" [value]="gen.value" name="gender" [(ngModel)]="manager.gender" />
+          <label [for]="gen.id">{{ gen.display }}</label>
+        </div>
+      </div>
+    </div>
+
+    <input type="submit" value="Update Manager" class="update-btn" [disabled]="!updateForm.valid" />
+    <button type="button" class="cancel-btn" (click)="cancelEdit()">Cancel</button>
+  </form>
+</section>
+

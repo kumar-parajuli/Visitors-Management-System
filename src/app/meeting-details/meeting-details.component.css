@@ -7,6 +7,7 @@
   background: #fff;
   padding: 20px 50px;
   border-radius: 8px;
+  
 }
 .container header {
   font-size: 1.5rem;
@@ -170,13 +171,11 @@ span {
   font-weight: bold;
 }
 span.footer {
-  /* padding: 5px 5px; */
+  padding: 5px 5px;
   font-weight: bold;
   color: #c9c2c9;
 }
-.user-edit {
-  justify-content: space-between;
-}
+
 .user-edit {
   display: flex; /* Use flexbox to align items in one line */
   gap: 10px; /* Adjust the gap between buttons */
@@ -192,3 +191,11 @@ span.footer {
   border-radius: 5px;
   cursor: pointer;
 }
+/* grid */
+/* .grid-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px; /* Adjust the gap as needed */
+
+
+

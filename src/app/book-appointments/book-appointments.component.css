@@ -195,3 +195,68 @@ span.footer {
 .delete-button:hover {
   background-color: #2980b9; /* Example hover background color */
 }
+/* ///edit style */
+.edit-form {
+  margin-top: 20px;
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.edit-form h2 {
+  font-size: 22px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.edit-form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.edit-form input,
+.edit-form textarea,
+.edit-form select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.edit-form .user-edit {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.edit-form button {
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.edit-form button.cancel-button {
+  background-color: #dc3545;
+}
+.booking-appointment-edit-form {
+  /* Add your specific styles for the bookingAppointment edit form here */
+  background-color: #e6f7ff; /* Example background color */
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 10px;
+  /* Add more styles as needed */
+}
+
+.booking-appointment-edit-form h2 {
+  color: #007bff; /* Example text color */
+  /* Add more styles as needed */
+}
+
+/* Add more styles as needed for other input fields or specific elements */

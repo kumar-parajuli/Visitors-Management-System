@@ -1,0 +1,41 @@
+<!-- src/app/update-visitor/update-visitor.component.html -->
+<section class="container">
+  <header>Edit Visitor</header>
+
+  <form class="form" (ngSubmit)="updateVisitor()" #updateForm="ngForm">
+    <div class="input-box">
+      <input type="text" placeholder="First Name" name="firstName" [(ngModel)]="visitor.firstName" required />
+    </div>
+
+    <div class="input-box">
+      <input type="text" placeholder="Last Name" name="lastName" [(ngModel)]="visitor.lastName" required />
+    </div>
+
+    <div class="input-box">
+      <input type="text" placeholder="Email" name="email" [(ngModel)]="visitor.email" required />
+    </div>
+
+    <div class="input-box">
+      <input type="text" placeholder="Address" name="address" [(ngModel)]="visitor.address" required />
+    </div>
+
+    <div class="column">
+      <div class="input-box">
+        <input type="number" placeholder="Phone Number" name="phoneNumber" [(ngModel)]="visitor.phoneNumber" required />
+      </div>
+    </div>
+
+    <div class="gender-box">
+      <h3>Gender</h3>
+      <div class="gender-option">
+        <div class="gender" *ngFor="let gen of genders">
+          <input type="radio" [id]="gen.id" [value]="gen.value" name="gender" [(ngModel)]="visitor.gender" />
+          <label [for]="gen.id">{{ gen.display }}</label>
+        </div>
+      </div>
+    </div>
+
+    <input type="submit" value="Update Visitor" class="update-btn" [disabled]="!updateForm.valid" />
+    <button type="button" class="cancel-btn" (click)="cancelEdit()">Cancel</button>
+  </form>
+</section>

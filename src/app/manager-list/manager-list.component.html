@@ -1,13 +1,13 @@
 <section class="container" [ngClass]="{ 'form-shadow': addForm.touched }">
   <header>Add Manager</header>
 
-  <form class="form" (ngSubmit)="onFormSubmitted()" #addForm="ngForm">
+  <form class="form" (ngSubmit)="addManager()" #addForm="ngForm">
     <div class="input-box">
       <input
         type="text"
         placeholder="First Name"
         name="firstname"
-        ngModel
+        [(ngModel)]="firstName"
         required
         #fname="ngModel"
       />
@@ -15,7 +15,6 @@
         <small *ngIf="fname.invalid && fname.touched"
           >*First Name is a Required Field</small
         >
-        <!-- <span *ngIf="firstName">You Enter:{{ firstName }}</span> -->
       </div>
     </div>
 
@@ -24,7 +23,7 @@
         type="text"
         placeholder="Last Name"
         name="lastname"
-        ngModel
+        [(ngModel)]="lastName"
         required
         #lname="ngModel"
       />
@@ -32,7 +31,6 @@
         <small *ngIf="lname.invalid && lname.touched"
           >*Last Name is a Required Field</small
         >
-        <!-- <span *ngIf="lastName">You Enter:{{ lastName }}</span> -->
       </div>
     </div>
 
@@ -41,20 +39,18 @@
         type="text"
         placeholder="Email"
         name="email"
-        ngModel
+        [(ngModel)]="email"
         required
-        email
-        #email="ngModel"
+        #emailname="ngModel"
         pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
       />
       <div>
-        <small *ngIf="email.invalid && email.touched">
+        <small *ngIf="emailname.invalid && emailname.touched">
           *Entered Email is not valid
         </small>
-        <small *ngIf="email.hasError('pattern') && email.touched">
+        <small *ngIf="emailname.hasError('pattern') && emailname.touched">
           *Please enter a valid email address !
         </small>
-        <!-- <span *ngIf="emailAddress">You entered: {{ emailAddress }}</span> -->
       </div>
     </div>
 
@@ -64,14 +60,13 @@
         placeholder="Address"
         name="address"
         #aname="ngModel"
-        ngModel
+        [(ngModel)]="address"
         required
       />
       <div>
         <small *ngIf="aname.invalid && aname.touched"
           >*Address is a Required Field</small
         >
-        <!-- <span *ngIf="address">You Enter:{{ address }}</span> -->
       </div>
     </div>
 
@@ -81,7 +76,7 @@
           type="number"
           placeholder="Phone Number"
           name="phonenumber"
-          ngModel
+          [(ngModel)]="phoneNumber"
           #pname="ngModel"
           required
           pattern="^(\+977-?)?9\d{9}$"
@@ -96,17 +91,6 @@
           </small>
         </div>
       </div>
-      <div class="input-box">
-        <input
-          type="date"
-          placeholder="Date of Birth"
-          name="dob"
-          ngModel
-          required
-          #tempdob="ngModel"
-          max="{{ getMaxDate() }}"
-        />
-      </div>
     </div>
 
     <div class="gender-box">
@@ -118,10 +102,10 @@
             [id]="gen.id"
             [value]="gen.value"
             name="gender"
-            [ngModel]="defaultGender"
+            [(ngModel)]="gender"
           />
 
-          <label for="check-male">{{ gen.display }}</label>
+          <label [for]="gen.id">{{ gen.display }}</label>
         </div>
       </div>
     </div>
@@ -133,31 +117,33 @@
     />
   </form>
 </section>
-<section class="user-detail-container">
+
+<section *ngFor="let manager of managers" class="user-detail-container">
   <div class="user-details-container">
     <div class="user-avatar">
       <p>
-        {{ firstName.slice(0, 1).toUpperCase()
-        }}{{ lastName.slice(0, 1).toUpperCase() }}
+        {{ manager.firstName.slice(0, 1).toUpperCase()
+        }}{{ manager.lastName.slice(0, 1).toUpperCase() }}
       </p>
     </div>
     <div class="user-details">
       <div class="user-name">
-        <h2>{{ firstName }} {{ lastName }}</h2>
+        <h2>{{ manager.firstName }} {{ manager.lastName }}</h2>
       </div>
-      <p><b>Username:</b> {{ firstName }} {{ lastName }}</p>
-      <p><b>Email:</b> {{ emailAddress }}</p>
-      <p><b>PhoneNo:</b>{{ phoneNumber }}</p>
-      <p><b>Date of birth:</b> {{ dob }}</p>
-      <p><b>Gender:</b> {{ gender }}</p>
+      <p><b>Username:</b> {{ manager.firstName }} {{ manager.lastName }}</p>
+      <p><b>Email:</b> {{ manager.email }}</p>
+      <p><b>PhoneNo:</b>{{ manager.phoneNumber }}</p>
+      <p><b>Gender:</b> {{ manager.gender }}</p>
 
       <div class="user-name">
-        <h3>Address:{{ address }}</h3>
+        <h3>Address:{{ manager.address }}</h3>
       </div>
       <div class="user-edit">
-        <button class="edit-button" (click)="editMeeting()">Edit</button>
+        <button class="edit-button" (click)="editManager(manager)">Edit</button>
         <span class="footer">&copy; 2024. All rights reserved.</span>
-        <button class="delete-button" (click)="deleteMeeting()">Delete</button>
+        <button class="delete-button" (click)="deleteManagerById(manager.id)">
+          Delete
+        </button>
       </div>
     </div>
   </div>

@@ -1,5 +1,8 @@
-import { Component, ViewChild } from '@angular/core';
+import { MeetingDetailsService } from '../services/meeting-details.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-book-appointments',
@@ -9,29 +12,112 @@ import { NgForm } from '@angular/forms';
 export class BookAppointmentsComponent {
   ManagerId: string = '';
   VisitorId: string = '';
+  ManagerFirstname: string = '';
+  VisitorFirstname: string = '';
   appointmentDate: string = '';
   Remarks: string = '';
-   selectedTime: string = '';
-  MeetingTitle: string = '';
-  Attendees: string = '';
+  bookingAppointment: string = '';
+  // MeetingTitle: string = '';
+  // Attendees: string = '';
+  meetingDetails: any[] = [];
+
   @ViewChild('addBook') form: NgForm;
-  onFormSubmitted() {
-    console.log(this.selectedTime);
-    console.log(this.form);
-    this.ManagerId = this.form.value.managerId;
-    this.VisitorId = this.form.value.visitorId;
-    this.appointmentDate = this.form.value.appointmentDate;
-    this.Remarks = this.form.value.remarks;
-    this.selectedTime = this.form.value.time;
-    this.MeetingTitle = this.form.value.meetingtitle;
-    this.Attendees = this.form.value.attendees;
-    this.form.reset();
-  }
-  editMeeting() {
-    console.log('Edit meeting clicked');
+  bookingOptions = [
+    { id: 'check-yes', value: 'yes', display: 'Yes' },
+    { id: 'check-no', value: 'no', display: 'No' },
+    { id: 'check-other', value: 'other', display: 'Prefer not to say' },
+  ];
+  selectedBooking: string = 'yes';
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private meetingDetailsService: MeetingDetailsService
+  ) {}
+
+  ngOnInit(): void {
+    this.fetchMeetingDetails();
   }
 
-  deleteMeeting() {
-    console.log('Delete meeting clicked');
+  fetchMeetingDetails() {
+    this.meetingDetailsService.getAllMeetingDetails().subscribe((data: any) => {
+      this.meetingDetails = data;
+    });
+  }
+  addBookAppointment() {
+    const newBookAppointment = {
+      managerId: this.ManagerId,
+      visitorId: this.VisitorId,
+      managerFirstname: this.ManagerFirstname,
+      VisitorFirstname: this.VisitorFirstname,
+      appointmentDate: this.appointmentDate,
+      bookingAppointment: this.bookingAppointment,
+      remarks: this.Remarks,
+    };
+
+    this.meetingDetailsService.addMeetingDetails(newBookAppointment).subscribe(
+      (data) => {
+        console.log('Meeting details added successfully:', data);
+        this.resetForm();
+        this.fetchMeetingDetails();
+      },
+      (error) => {
+        console.error('Error adding meeting details:', error);
+      }
+    );
+  }
+
+  editMeetingDetails(meetingId: number) {
+    this.router.navigate(['/update-meeting', meetingId]);
+  }
+  deleteMeetingDetails(id: number): void {
+    // Implement delete meeting logic
+    console.log('Delete button clicked for meeting details with ID:', id);
+    this.meetingDetailsService.deleteMeetingDetails(id).subscribe(
+      () => {
+        this.fetchMeetingDetails();
+      },
+      (error) => {
+        console.error('Error deleting meeting details: ', error);
+      }
+    );
+  }
+  editAppointment(appointment: any) {
+    // Set isEditing to true for the selected appointment
+    appointment.isEditing = true;
+  }
+
+  updateAppointment(appointment: any) {
+    // Implement the logic to update the appointment
+    this.meetingDetailsService
+      .updateMeetingDetails(appointment.id, appointment)
+      .subscribe(
+        () => {
+          
+          this.fetchMeetingDetails();
+        },
+        (error) => {
+          console.error('Error updating appointment details:', error);
+        }
+      );
+
+    // Reset isEditing to false after updating
+    appointment.isEditing = false;
+  }
+
+  cancelEditing(appointment: any) {
+    // Reset isEditing to false when canceling the edit
+    appointment.isEditing = false;
+  }
+  resetForm(): void {
+    (this.ManagerFirstname = ''),
+      (this.VisitorFirstname = ''),
+      (this.appointmentDate = '');
+    this.Remarks = '';
+    this.bookingAppointment;
+    this.form.reset();
+  }
+  bookAppointment() {
+    // Navigate to the booking-appointment-details route
+    this.router.navigate(['/booking-appointment']);
   }
 }

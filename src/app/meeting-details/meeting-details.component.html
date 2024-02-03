@@ -1,7 +1,7 @@
 <section class="container" [ngClass]="{ 'form-shadow': addMeeting.touched }">
   <header>Meeting Details Form</header>
 
-  <form class="form" (ngSubmit)="onFormSubmitted()" #addMeeting="ngForm">
+  <form class="form" (ngSubmit)="addMeetingDetails()" #addMeeting="ngForm">
     <div class="input-box">
       <label for="managerId">Manager ID:</label>
 
@@ -9,7 +9,7 @@
         type="text"
         id="managerId"
         name="managerId"
-        ngModel
+        [(ngModel)]="managerId"
         required
         #mname="ngModel"
       />
@@ -25,7 +25,7 @@
         type="text"
         id="visitorId"
         name="visitorId"
-        ngModel
+        [(ngModel)]="visitorId"
         required
         #vname="ngModel"
       />
@@ -42,7 +42,7 @@
         type="date"
         id="appointmentDate"
         name="appointmentDate"
-        ngModel
+        [(ngModel)]="appointmentDate"
         required
         #aname="ngModel"
       />
@@ -60,7 +60,7 @@
         name="remarks"
         rows="4"
         cols="50"
-        ngModel
+        [(ngModel)]="Remarks"
         required
         #rname="ngModel"
       ></textarea>
@@ -70,14 +70,38 @@
         </small>
       </div>
     </div>
+    <div class="gender-box">
+      <h3>Book Appointment</h3>
+      <div class="gender-option">
+        <div class="gender" *ngFor="let book of bookings">
+          <input
+            type="radio"
+            [id]="book.id"
+            [value]="book.value"
+            name="booking"
+            [(ngModel)]="defaultbooking"
+          />
 
-    <button type="submit" class="submit-btn">Submit</button>
+          <label [for]="book.id">{{ book.display }}</label>
+        </div>
+      </div>
+    </div>
+   <input
+      type="submit"
+      value="Add Meeting"
+      class="submit-btn"
+     
+    />
   </form>
 </section>
 
-<!-- ///retrive the data from the form -->
-<section class="user-detail-container">
-  <div class="user-details-container">
+<!-- Meeting Details Section -->
+
+<!-- <section *ngIf="meetingDetails.length > 0" class="user-detail-container">
+  <div
+  class="user-details-container"
+    *ngFor="let meetingDetail of meetingDetails"
+  >
     <div class="user-avatar">
       <p>MD</p>
     </div>
@@ -85,16 +109,103 @@
       <div class="user-name">
         <h2>Meeting Details</h2>
       </div>
-      <p><b>ManagerId:</b> {{ ManagerId }}</p>
-      <p><b>VisitorId:</b> {{ VisitorId }}</p>
-      <p><b>Remarks:</b>{{ Remarks }}</p>
+      <p><b>ManagerId:</b> {{ meetingDetail.manager.id }}</p>
+      <p
+        *ngIf="
+          meetingDetail.visitor !== null && meetingDetail.visitor !== undefined
+        "
+      >
+        <b>VisitorId:</b> {{ meetingDetail.visitor.id }}
+      </p>
+      <p><b>Remarks:</b>{{ meetingDetail.remarks }}</p>
+
       <div class="user-name">
-        <h3>AppointmentDate:{{ appointmentDate }}</h3>
+        <h3>AppointmentDate:{{ meetingDetail.appointmentDate }}</h3>
+        <h3>Book Appointment:{{ meetingDetail.bookingAppointment }}</h3>
       </div>
       <div class="user-edit">
-        <button class="edit-button" (click)="editMeeting()">Edit</button>
+        <button
+          class="edit-button"
+          (click)="editMeetingDetails(meetingDetail.id)"
+        >
+          Edit
+        </button>
+
         <span class="footer">&copy; 2024. All rights reserved.</span>
-        <button class="delete-button" (click)="deleteMeeting()">Delete</button>
+        <button
+          class="delete-button"
+          (click)="deleteMeetingDetails(meetingDetail.id)"
+        >
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+<!-- Booking Appointment Details Section -->
+<!-- <section *ngIf="meetingDetails.length > 0" class="user-detail-container">
+    <div
+      *ngFor="let appointment of meetingDetails"
+      class="user-details-container"
+    >
+      <div class="user-avatar">
+        <p>MD</p>
+      </div>
+      <div class="user-details">
+        <div class="user-name">
+          <h2>Appointment Details</h2>
+        </div>
+        <p><b>ManagerFirstName:</b> {{ appointment.manager.firstName }}</p>
+        <p
+          *ngIf="
+            appointment.visitor !== null && appointment.visitor !== undefined
+          "
+        >
+          <b>VisitorName:</b> {{ appointment.visitor.firstName }}
+        </p>
+        <p><b>Remarks:</b>{{ appointment.remarks }}</p>
+        <div class="user-name">
+          <h3>Book Appointment:{{ appointment.bookingAppointment }}</h3>
+        </div>
+        <div class="user-edit">
+          <button class="edit-button">Edit</button>
+          <span class="footer">&copy; 2024. All rights reserved.</span>
+          <button class="delete-button">Delete</button>
+        </div>
+      </div>
+    </div>
+  </section> -->
+<section *ngIf="meetingDetails.length > 0">
+  <div *ngFor="let meetingDetail of meetingDetails" class="user-detail-container">
+    <div class="user-details-container">
+      <div class="user-avatar">
+        <p>MD</p>
+      </div>
+      <div class="user-details">
+        <div class="user-name">
+          <h2>Meeting Details</h2>
+        </div>
+        <p><b>ManagerId:</b> {{ meetingDetail.manager.id }}</p>
+        <p *ngIf="meetingDetail.visitor !== null && meetingDetail.visitor !== undefined">
+          <b>VisitorId:</b> {{ meetingDetail.visitor.id }}
+        </p>
+        <p><b>Remarks:</b>{{ meetingDetail.remarks }}</p>
+
+        <div class="user-name">
+          <h3>AppointmentDate:{{ meetingDetail.appointmentDate }}</h3>
+          <h3>Book Appointment:{{ meetingDetail.bookingAppointment }}</h3>
+        </div>
+        <div class="user-edit">
+          <button class="edit-button" (click)="editMeetingDetails(meetingDetail.id)">
+            Edit
+          </button>
+
+          <span class="footer">&copy; 2024. All rights reserved.</span>
+          <button class="delete-button" (click)="deleteMeetingDetails(meetingDetail.id)">
+            Delete
+          </button>
+        </div>
       </div>
     </div>
   </div>

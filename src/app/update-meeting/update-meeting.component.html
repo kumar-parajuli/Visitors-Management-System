@@ -1,0 +1,78 @@
+<section class="container">
+  <header>Edit Meeting Details</header>
+
+  <form class="form" (ngSubmit)="updateMeetingDetails()" #updateForm="ngForm">
+    <!-- Use [(ngModel)] to bind to the properties of meetingDetails -->
+    <div class="input-box">
+      <label for="managerId">Manager ID:</label>
+      <input
+        type="text"
+        id="managerId"
+        name="managerId"
+        [(ngModel)]="meetingDetails.manager.id"
+        required
+      />
+    </div>
+
+    <div class="input-box">
+      <label for="visitorId">Visitor ID:</label>
+      <input
+        type="text"
+        id="visitorId"
+        name="visitorId"
+        [(ngModel)]="meetingDetails.visitor.id"
+        required
+      />
+    </div>
+
+    <div class="input-box">
+      <label for="appointmentDate">Appointment Date:</label>
+      <input
+        type="date"
+        id="appointmentDate"
+        name="appointmentDate"
+        [(ngModel)]="meetingDetails.appointmentDate"
+        required
+      />
+    </div>
+
+    <div class="input-box">
+      <label for="remarks">Remarks:</label>
+      <textarea
+        class="textarea"
+        id="remarks"
+        name="remarks"
+        rows="4"
+        cols="50"
+        [(ngModel)]="meetingDetails.remarks"
+        required
+      ></textarea>
+    </div>
+
+    <div class="gender-box">
+      <h3>Book Appointment</h3>
+      <div class="gender-option">
+        <div class="gender" *ngFor="let book of booking">
+          <input
+            type="radio"
+            [id]="book.id"
+            [value]="book.value"
+            name="booking"
+            [(ngModel)]="meetingDetails.bookingAppointment"
+          />
+          <label [for]="book.id">{{ book.display }}</label>
+        </div>
+      </div>
+    </div>
+
+    <input
+      type="submit"
+      value="Update Meeting Details"
+      class="update-btn"
+      [disabled]="!updateForm.valid"
+    />
+    <button type="button" class="cancel-btn" (click)="cancelEdit()">
+      Cancel Meeting Details
+    </button>
+  </form>
+</section>
