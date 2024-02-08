@@ -7,7 +7,6 @@
   background: #fff;
   padding: 20px 50px;
   border-radius: 8px;
-  
 }
 .container header {
   font-size: 1.5rem;
@@ -191,11 +190,59 @@ span.footer {
   border-radius: 5px;
   cursor: pointer;
 }
-/* grid */
-/* .grid-container {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px; /* Adjust the gap as needed */
 
+.custom-input-box {
+  position: flex;
+  width: 100%;
+  margin-top: 5px;
+}
 
+.custom-input-box .p-autoComplete {
+  width: 100%;
+}
+
+.custom-input-box .p-autoComplete input {
+  /* Style the input field */
+  height: 50px;
+  width: 100%;
+  outline: none;
+  font-size: 1rem;
+  color: #707070;
+  margin-top: 8px;
+  border-radius: 6px;
+  padding: 0 15px;
+}
+
+.custom-input-box .p-autoComplete input:focus {
+  /* Style when input field is focused */
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+}
+
+.custom-input-box .p-autoComplete .ui-autocomplete {
+  /* Style the dropdown menu */
+  width: 100%;
+  background-color: #fff;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.custom-input-box .p-autoComplete .ui-autocomplete .ui-autocomplete-panel {
+  /* Style the panel inside the dropdown menu */
+  border: none;
+}
+
+.custom-input-box .p-autoComplete .ui-autocomplete .ui-autocomplete-item {
+  /* Style the items inside the dropdown menu */
+  padding: 8px 15px;
+  cursor: pointer;
+}
+
+.custom-input-box
+  .p-autoComplete
+  .ui-autocomplete
+  .ui-autocomplete-item.ui-state-highlight {
+  /* Style the highlighted item */
+  background-color: #f0f0f0;
+}
+/* //new style */
 

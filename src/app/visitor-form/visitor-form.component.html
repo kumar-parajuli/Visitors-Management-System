@@ -84,6 +84,7 @@
           #pname="ngModel"
           required
           pattern="^(\+977-?)?9\d{9}$"
+          min="0"
         />
         <div>
           <small *ngIf="pname.invalid && pname.touched">

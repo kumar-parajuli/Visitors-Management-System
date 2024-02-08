@@ -16,7 +16,9 @@ import { BookingAppointmentService } from './services/booking-appointment.servic
 import { ManagerUpdateComponent } from './manager-update/manager-update.component';
 import { UpdateVisitorComponent } from './update-visitor/update-visitor.component';
 import { UpdateMeetingComponent } from './update-meeting/update-meeting.component';
-
+import { PrimeNGConfig } from 'primeng/api';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,12 +30,20 @@ import { UpdateMeetingComponent } from './update-meeting/update-meeting.componen
     UpdateVisitorComponent,
     UpdateMeetingComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    AutoCompleteModule,
+    BrowserAnimationsModule,
+  ],
   providers: [
     // ManagerService,
     VisitorService,
     MeetingDetailsService,
     BookingAppointmentService,
+    PrimeNGConfig,
   ],
   bootstrap: [AppComponent],
 })

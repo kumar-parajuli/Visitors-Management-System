@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 
 export interface MeetingDetails {
   managerId: string;
+  managerUsername: string;
   visitorId: string;
+  visitorUsername: string;
   appointmentDate: string;
   bookingAppointment: string;
   remarks: string;
@@ -16,13 +17,21 @@ export interface MeetingDetails {
 })
 export class MeetingDetailsService {
   private apiUrl = 'http://localhost:8080/api/meeting-details';
+  private apiUrls = 'http://localhost:8080/api/managers';
 
+  private visitorApiUrl = 'http://localhost:8080/api/visitors';
   constructor(private http: HttpClient) {}
 
   getAllMeetingDetails(): Observable<MeetingDetails[]> {
     return this.http.get<MeetingDetails[]>(this.apiUrl);
   }
+  getAllManagers(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrls);
+  }
 
+  getAllVisitors(): Observable<any[]> {
+    return this.http.get<any[]>(this.visitorApiUrl);
+  }
   getMeetingDetailsById(id: number): Observable<MeetingDetails> {
     return this.http.get<MeetingDetails>(`${this.apiUrl}/${id}`);
   }

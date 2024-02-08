@@ -98,7 +98,7 @@ export class ManagerListComponent implements OnInit {
       gender: 'male',
     });
   }
-  
+
   getMaxDate(): string {
     const today = new Date();
     return today.toISOString().split('T')[0];

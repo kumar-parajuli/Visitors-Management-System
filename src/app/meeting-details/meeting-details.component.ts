@@ -5,20 +5,32 @@ import { MeetingDetailsService } from '../services/meeting-details.service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { MeetingDetails } from '../services/meeting-details.service';
-
+import { PrimeNGConfig } from 'primeng/api';
 @Component({
   selector: 'app-meeting-details',
   templateUrl: './meeting-details.component.html',
   styleUrls: ['./meeting-details.component.css'],
 })
 export class MeetingDetailsComponent implements OnInit {
-  managerId: string = '';
-  visitorId: string = '';
+  // managerId: string = '';
+  managerUsername: string = '';
+  // managerFirstName: string = '';
+  // visitorId: string = '';
+  visitorUsername: string = '';
+  // visitorFirstName: string = '';
   appointmentDate: string = '';
   bookingAppointment: string = '';
   Remarks: string = '';
+  minDate: string;
   // meetingDetails: any[] = [];
+  selectedManager: any;
+  selectedVisitor: any;
+  managerSuggestions: any[] = [];
+  visitorSuggestions: any[] = [];
+
   meetingDetails: any;
+  managers: any[] = [];
+  visitors: any[] = [];
   @ViewChild('addMeeting') form: NgForm;
   bookings = [
     { id: 'check-yes', value: 'yes', display: 'Yes' },
@@ -30,28 +42,121 @@ export class MeetingDetailsComponent implements OnInit {
     private http: HttpClient,
     private router: Router,
 
-    private meetingDetailsService: MeetingDetailsService
-  ) {}
+    private meetingDetailsService: MeetingDetailsService,
+    private primengConfig: PrimeNGConfig
+  ) {
+    this.minDate = new Date().toISOString().split('T')[0];
+    this.primengConfig.ripple = true;
+  }
 
   ngOnInit(): void {
     this.fetchMeetingDetails();
+    this.fetchManagers();
+    this.fetchVisitors();
   }
 
+  searchManagers(event: any) {
+    this.meetingDetailsService.getAllManagers().subscribe((data: any) => {
+      this.managerSuggestions = data;
+    });
+    console.log(this.managerSuggestions);
+  }
+  searchVisitors(event: any) {
+    this.meetingDetailsService.getAllVisitors().subscribe((data: any) => {
+      this.visitorSuggestions = data;
+    });
+  }
+  fetchManagers() {
+    this.meetingDetailsService.getAllManagers().subscribe((data: any) => {
+      this.managers = data;
+    });
+  }
+
+  fetchVisitors() {
+    this.meetingDetailsService.getAllVisitors().subscribe((data: any) => {
+      this.visitors = data;
+    });
+  }
   fetchMeetingDetails() {
     this.meetingDetailsService.getAllMeetingDetails().subscribe((data: any) => {
       this.meetingDetails = data;
     });
   }
 
+  // addMeetingDetails() {
+  //   console.log('Manager Username:', this.managerUsername);
+  //   if (!this.managerUsername) {
+  //     console.error('Manager username is empty or undefined.');
+  //     return;
+  //   }
+  //   const selectedManager = this.managers.find(
+  //     (manager) => manager.id === this.managerUsername
+  //   );
+  //   console.log(selectedManager);
+  //   console.log(this.managerUsername);
+  //   const selectedVisitor = this.visitors.find(
+  //     (visitor) => visitor.id === this.visitorUsername
+  //   );
+
+  //   if (!selectedManager) {
+  //     console.error(`Manager with username ${this.managerUsername} not found.`);
+  //     return;
+  //   }
+
+  //   if (!selectedVisitor) {
+  //     console.error(`Visitor with username ${this.visitorUsername} not found.`);
+  //     return;
+  //   }
+
+  //   const newMeetingDetails: MeetingDetails = {
+  //     managerId: selectedManager.id,
+  //     managerUsername: selectedManager.firstName,
+  //     visitorId: selectedVisitor.id,
+  //     visitorUsername: selectedVisitor.firstName,
+  //     appointmentDate: this.appointmentDate,
+  //     bookingAppointment: this.bookingAppointment,
+  //     remarks: this.Remarks,
+  //   };
+
+  //   console.log('New Meeting Details:', newMeetingDetails);
+
+  //   this.meetingDetailsService.addMeetingDetails(newMeetingDetails).subscribe(
+  //     (data) => {
+  //       console.log('Meeting details added successfully:', data);
+  //       this.resetForm();
+  //       this.fetchMeetingDetails();
+  //     },
+  //     (error) => {
+  //       console.error('Error adding meeting details:', error);
+  //     }
+  //   );
+  // }
   addMeetingDetails() {
+    console.log('Selected Manager:', this.selectedManager);
+    console.log('Selected Visitor:', this.selectedVisitor);
+
+    if (!this.selectedManager) {
+      console.error('Manager is not selected.');
+      return;
+    }
+
+    if (!this.selectedVisitor) {
+      console.error('Visitor is not selected.');
+      return;
+    }
+
     const newMeetingDetails: MeetingDetails = {
-      managerId: this.managerId,
-      visitorId: this.visitorId,
+      managerId: this.selectedManager.id,
+      managerUsername: this.selectedManager.firstName,
+      visitorId: this.selectedVisitor.id,
+      visitorUsername: this.selectedVisitor.firstName,
       appointmentDate: this.appointmentDate,
       bookingAppointment: this.bookingAppointment,
       remarks: this.Remarks,
     };
-    console.log(newMeetingDetails);
+
+    console.log('New Meeting Details:', newMeetingDetails);
+
     this.meetingDetailsService.addMeetingDetails(newMeetingDetails).subscribe(
       (data) => {
         console.log('Meeting details added successfully:', data);
@@ -63,7 +168,6 @@ export class MeetingDetailsComponent implements OnInit {
       }
     );
   }
-
   editMeetingDetails(meetingId: number) {
     this.router.navigate(['/update-meeting', meetingId]);
   }
@@ -81,8 +185,10 @@ export class MeetingDetailsComponent implements OnInit {
   }
 
   resetForm(): void {
-    this.managerId = '';
-    this.visitorId = '';
+    // this.managerId = '';
+    this.managerUsername = '';
+    // this.visitorId = '';
+    this.visitorUsername = '';
     this.appointmentDate = '';
     this.bookingAppointment = '';
     this.Remarks = '';

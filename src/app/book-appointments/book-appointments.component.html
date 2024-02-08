@@ -10,10 +10,11 @@
         </div>
         <p
           *ngIf="
-            appointment.visitor !== null && appointment.visitor !== undefined
+            appointment.manager !== null && appointment.manager !== undefined
           "
         >
           <b>ManagerFirstName:</b> {{ appointment.manager.firstName }}
+          {{ appointment.manager.lastName }}
         </p>
         <p
           *ngIf="
@@ -21,6 +22,7 @@
           "
         >
           <b>VisitorFirstName:</b> {{ appointment.visitor.firstName }}
+          {{ appointment.visitor.lastName }}
         </p>
         <p><b>Remarks:</b>{{ appointment.remarks }}</p>
         <div class="user-name">
@@ -41,6 +43,7 @@
         </div>
       </div>
     </div>
+
     <!-- Display edit form only for the selected appointment -->
     <div *ngIf="appointment.isEditing" class="edit-form">
       <h2>Edit Appointment</h2>
@@ -48,23 +51,72 @@
       <input
         type="text"
         id="editManagerFirstname"
-        [(ngModel)]="appointment.manager.firstName"
+        [ngModel]="
+          appointment.manager.firstName + ' ' + appointment.manager.lastName
+        "
+        required
+        #managerFirstname="ngModel"
+        [min]="minDate"
       />
+      <div
+        *ngIf="
+          managerFirstname.invalid &&
+          (managerFirstname.dirty || managerFirstname.touched)
+        "
+      >
+        <small *ngIf="managerFirstname.errors['required']">
+          * Manager First Name is required!
+        </small>
+      </div>
 
       <label for="editVisitorFirstname">Edit VisitorFirstname:</label>
       <input
         type="text"
         id="editVisitorFirstname"
-        [(ngModel)]="appointment.visitor.firstName"
+        [(ngModel)]="
+          appointment.visitor.firstName + ' ' + appointment.visitor.lastName
+        "
+        required
+        #visitorFirstname="ngModel"
       />
+      <div>
+        <small
+          *ngIf="
+            visitorFirstname.invalid &&
+            (visitorFirstname.dirty || visitorFirstname.touched)
+          "
+          >visitorFirstName is required.</small
+        >
+      </div>
       <label for="editRemarks">Edit Remarks:</label>
-      <input type="text" id="editRemarks" [(ngModel)]="appointment.remarks" />
+      <input
+        type="text"
+        id="editRemarks"
+        [(ngModel)]="appointment.remarks"
+        #remarks="ngModel"
+        required
+      />
+      <div>
+        <small *ngIf="remarks.invalid && (remarks.dirty || remarks.touched)"
+          >Remarks is required.</small
+        >
+      </div>
       <label for="editAppointmentDate">Edit Appointment Date:</label>
       <input
         type="date"
         id="editAppointmentDate"
         [(ngModel)]="appointment.appointmentDate"
+        #appointmentDate="ngModel"
       />
+      <div>
+        <small
+          *ngIf="
+            appointmentDate.invalid &&
+            (appointmentDate.dirty || appointmentDate.touched)
+          "
+          >AppointmentDate is required.</small
+        >
+      </div>
       <label for="editBookingAppointment">Edit Booking Appointment:</label>
       <input
         type="text"

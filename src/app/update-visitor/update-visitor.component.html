@@ -4,24 +4,98 @@
 
   <form class="form" (ngSubmit)="updateVisitor()" #updateForm="ngForm">
     <div class="input-box">
-      <input type="text" placeholder="First Name" name="firstName" [(ngModel)]="visitor.firstName" required />
+      <input
+        type="text"
+        placeholder="First Name"
+        name="firstName"
+        [(ngModel)]="visitor.firstName"
+        required
+        #fname="ngModel"
+      />
+      <div>
+        <small *ngIf="fname.invalid && fname.touched"
+          >*First Name is a Required Field</small
+        >
+        <!-- <span *ngIf="firstName">You Enter:{{ firstName }}</span> -->
+      </div>
     </div>
 
     <div class="input-box">
-      <input type="text" placeholder="Last Name" name="lastName" [(ngModel)]="visitor.lastName" required />
+      <input
+        type="text"
+        placeholder="Last Name"
+        name="lastName"
+        [(ngModel)]="visitor.lastName"
+        required
+        #lname="ngModel"
+      />
+      <div>
+        <small *ngIf="lname.invalid && lname.touched"
+          >*Last Name is a Required Field</small
+        >
+        <!-- <span *ngIf="lastName">You Enter:{{ lastName }}</span> -->
+      </div>
     </div>
 
     <div class="input-box">
-      <input type="text" placeholder="Email" name="email" [(ngModel)]="visitor.email" required />
+      <input
+        type="text"
+        placeholder="Email"
+        name="email"
+        [(ngModel)]="visitor.email"
+        required
+        #ename="ngModel"
+        pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+      />
+      <div>
+        <small *ngIf="ename.invalid && ename.touched">
+          *Entered Email is not valid
+        </small>
+        <small *ngIf="ename.hasError('pattern') && ename.touched">
+          *Please enter a valid email address !
+        </small>
+        <!-- <span *ngIf="emailAddress">You entered: {{ emailAddress }}</span> -->
+      </div>
     </div>
 
     <div class="input-box">
-      <input type="text" placeholder="Address" name="address" [(ngModel)]="visitor.address" required />
+      <input
+        type="text"
+        placeholder="Address"
+        name="address"
+        [(ngModel)]="visitor.address"
+        required
+        #aname="ngModel"
+      />
+      <div>
+        <small *ngIf="aname.invalid && aname.touched"
+          >*Address is a Required Field</small
+        >
+        <!-- <span *ngIf="address">You Enter:{{ address }}</span> -->
+      </div>
     </div>
 
     <div class="column">
       <div class="input-box">
-        <input type="number" placeholder="Phone Number" name="phoneNumber" [(ngModel)]="visitor.phoneNumber" required />
+        <input
+          type="number"
+          placeholder="Phone Number"
+          name="phoneNumber"
+          [(ngModel)]="visitor.phoneNumber"
+          #pname="ngModel"
+          required
+          pattern="^(\+977-?)?9\d{9}$"
+          min="0"
+        />
+        <div>
+          <small *ngIf="pname.invalid && pname.touched">
+            *Phone is a Required Field
+          </small>
+          <small *ngIf="pname.hasError('pattern') && pname.touched">
+            *Please enter a valid Nepali phone number with or without the
+            country code (+977)
+          </small>
+        </div>
       </div>
     </div>
 
@@ -29,13 +103,26 @@
       <h3>Gender</h3>
       <div class="gender-option">
         <div class="gender" *ngFor="let gen of genders">
-          <input type="radio" [id]="gen.id" [value]="gen.value" name="gender" [(ngModel)]="visitor.gender" />
+          <input
+            type="radio"
+            [id]="gen.id"
+            [value]="gen.value"
+            name="gender"
+            [(ngModel)]="visitor.gender"
+          />
           <label [for]="gen.id">{{ gen.display }}</label>
         </div>
       </div>
     </div>
 
-    <input type="submit" value="Update Visitor" class="update-btn" [disabled]="!updateForm.valid" />
-    <button type="button" class="cancel-btn" (click)="cancelEdit()">Cancel</button>
+    <input
+      type="submit"
+      value="Update Visitor"
+      class="update-btn"
+      [disabled]="!updateForm.valid"
+    />
+    <button type="button" class="cancel-btn" (click)="cancelEdit()">
+      Cancel
+    </button>
   </form>
 </section>

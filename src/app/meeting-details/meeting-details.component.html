@@ -2,38 +2,30 @@
   <header>Meeting Details Form</header>
 
   <form class="form" (ngSubmit)="addMeetingDetails()" #addMeeting="ngForm">
-    <div class="input-box">
-      <label for="managerId">Manager ID:</label>
-
-      <input
-        type="text"
-        id="managerId"
-        name="managerId"
-        [(ngModel)]="managerId"
-        required
-        #mname="ngModel"
-      />
-      <div>
-        <small *ngIf="mname.invalid && mname.touched"
-          >* Must Enter Manager Id is a Required Field!
-        </small>
-      </div>
+    <div class="custom-input-box">
+      <p-autoComplete
+        [(ngModel)]="selectedManager"
+        [suggestions]="managerSuggestions"
+        (completeMethod)="searchManagers($event)"
+        field="firstName"
+        [dropdown]="true"
+        [minLength]="1"
+        placeholder="Search Managers"
+        [ngModelOptions]="{ standalone: true }"
+      ></p-autoComplete>
     </div>
-    <div class="input-box">
-      <label for="visitorId">Visitor ID:</label>
-      <input
-        type="text"
-        id="visitorId"
-        name="visitorId"
-        [(ngModel)]="visitorId"
-        required
-        #vname="ngModel"
-      />
-      <div>
-        <small *ngIf="vname.invalid && vname.touched"
-          >* Must Enter Visitor Id is a Required Field!
-        </small>
-      </div>
+
+    <div class="custom-input-box">
+      <p-autoComplete
+        [(ngModel)]="selectedVisitor"
+        [suggestions]="visitorSuggestions"
+        (completeMethod)="searchVisitors($event)"
+        field="firstName"
+        [dropdown]="true"
+        [minLength]="1"
+        placeholder="Search Visitors"
+        [ngModelOptions]="{ standalone: true }"
+      ></p-autoComplete>
     </div>
 
     <div class="input-box">
@@ -45,6 +37,7 @@
         [(ngModel)]="appointmentDate"
         required
         #aname="ngModel"
+        [min]="minDate"
       />
       <div>
         <small *ngIf="aname.invalid && aname.touched">
@@ -103,14 +96,14 @@
         <div class="user-name">
           <h2>Meeting Details</h2>
         </div>
-        <p><b>ManagerId:</b> {{ meetingDetail.manager.id }}</p>
+        <p><b>ManagerUsername:</b> {{ meetingDetail.manager.firstName }}</p>
         <p
           *ngIf="
             meetingDetail.visitor !== null &&
             meetingDetail.visitor !== undefined
           "
         >
-          <b>VisitorId:</b> {{ meetingDetail.visitor.id }}
+          <b>VisitorUsername:</b> {{ meetingDetail.visitor.firstName }}
         </p>
         <p><b>Remarks:</b>{{ meetingDetail.remarks }}</p>
 

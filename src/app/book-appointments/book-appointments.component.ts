@@ -17,8 +17,8 @@ export class BookAppointmentsComponent {
   appointmentDate: string = '';
   Remarks: string = '';
   bookingAppointment: string = '';
-  // MeetingTitle: string = '';
-  // Attendees: string = '';
+  minDate: string;
+
   meetingDetails: any[] = [];
 
   @ViewChild('addBook') form: NgForm;
@@ -32,7 +32,9 @@ export class BookAppointmentsComponent {
     private http: HttpClient,
     private router: Router,
     private meetingDetailsService: MeetingDetailsService
-  ) {}
+  ) {
+    this.minDate = new Date().toISOString().split('T')[0];
+  }
 
   ngOnInit(): void {
     this.fetchMeetingDetails();
@@ -47,8 +49,8 @@ export class BookAppointmentsComponent {
     const newBookAppointment = {
       managerId: this.ManagerId,
       visitorId: this.VisitorId,
-      managerFirstname: this.ManagerFirstname,
-      VisitorFirstname: this.VisitorFirstname,
+      managerUsername: this.ManagerFirstname,
+      visitorUsername: this.VisitorFirstname,
       appointmentDate: this.appointmentDate,
       bookingAppointment: this.bookingAppointment,
       remarks: this.Remarks,
@@ -92,7 +94,6 @@ export class BookAppointmentsComponent {
       .updateMeetingDetails(appointment.id, appointment)
       .subscribe(
         () => {
-          
           this.fetchMeetingDetails();
         },
         (error) => {
