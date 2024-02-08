@@ -19,3 +19,24 @@ body {
   /* color:#282c35; */
   background: #282c35;
 }
+.p-autocomplete-dd .p-autocomplete-input,
+.p-autocomplete-dd .p-autocomplete-multiple-container {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  block-size: 3rem;
+}
+.custom-input-box .ui-autocomplete .ui-autocomplete-item {
+  padding: 8px 15px;
+  cursor: pointer;
+  overflow: hidden;
+  border: 2px solid red;
+  box-shadow: 6px 8px #888888;
+}
+.custom-input-box .ui-autocomplete .ui-autocomplete-panel {
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

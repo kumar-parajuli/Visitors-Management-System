@@ -2,7 +2,7 @@
   position: relative;
   max-width: 700px;
   width: 100%;
-  /* border: #333; */
+
   margin-top: 3rem;
   background: #fff;
   padding: 20px 50px;
@@ -32,11 +32,11 @@
   position: relative;
   height: 50px;
   width: 100%;
+  margin-top: 5rem;
   outline: none;
   font-size: 1rem;
   color: #707070;
   margin-top: 8px;
-  /* border: 1px solid #ddd; */
   border-radius: 6px;
   padding: 0 15px;
 }
@@ -100,7 +100,7 @@
 .form .submit-btn:hover {
   background: #ff2800;
 }
-/*Responsive*/
+
 @media screen and (max-width: 500px) {
   .form .column {
     flex-wrap: wrap;
@@ -176,73 +176,61 @@ span.footer {
 }
 
 .user-edit {
-  display: flex; /* Use flexbox to align items in one line */
-  gap: 10px; /* Adjust the gap between buttons */
+  display: flex;
+  gap: 10px;
 }
 
-/* Styling for the buttons */
 .edit-button,
 .delete-button {
-  padding: 10px; /* Add padding for better visual appearance */
-  background-color: #d9381e; /* Example background color */
-  color: #c9c2c2; /* Example text color */
+  padding: 10px;
+  background-color: #d9381e;
+  color: #c9c2c2;
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
 
-.custom-input-box {
-  position: flex;
-  width: 100%;
-  margin-top: 5px;
+.input-container {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.custom-input-box .p-autoComplete {
-  width: 100%;
+.custom-input-box p-autoComplete {
+  flex: 1;
 }
 
-.custom-input-box .p-autoComplete input {
-  /* Style the input field */
+.custom-input-box p-autoComplete input {
   height: 50px;
   width: 100%;
   outline: none;
   font-size: 1rem;
   color: #707070;
-  margin-top: 8px;
-  border-radius: 6px;
+  border-radius: 20px;
   padding: 0 15px;
+  border: 2px solid #ccc;
 }
 
-.custom-input-box .p-autoComplete input:focus {
-  /* Style when input field is focused */
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
-}
-
-.custom-input-box .p-autoComplete .ui-autocomplete {
-  /* Style the dropdown menu */
+.custom-input-box p-autoComplete .ui-autocomplete {
   width: 100%;
   background-color: #fff;
-  border-radius: 6px;
+  border-radius: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.custom-input-box .p-autoComplete .ui-autocomplete .ui-autocomplete-panel {
-  /* Style the panel inside the dropdown menu */
+.custom-input-box p-autoComplete .ui-autocomplete .ui-autocomplete-panel {
   border: none;
 }
 
-.custom-input-box .p-autoComplete .ui-autocomplete .ui-autocomplete-item {
-  /* Style the items inside the dropdown menu */
+.custom-input-box p-autoComplete .ui-autocomplete .ui-autocomplete-item {
   padding: 8px 15px;
   cursor: pointer;
 }
 
 .custom-input-box
-  .p-autoComplete
+  p-autoComplete
   .ui-autocomplete
   .ui-autocomplete-item.ui-state-highlight {
-  /* Style the highlighted item */
-  background-color: #f0f0f0;
+  background-color: #c69be4;
 }
-/* //new style */
-
