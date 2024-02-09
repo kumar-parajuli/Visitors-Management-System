@@ -18,9 +18,11 @@ export class BookAppointmentsComponent {
   Remarks: string = '';
   bookingAppointment: string = '';
   minDate: string;
-
   meetingDetails: any[] = [];
-
+  visitors: any[] = [];
+  selectedAppointment: any;
+  showManagerDetails: boolean = false;
+  showVisitorDetails: boolean = false;
   @ViewChild('addBook') form: NgForm;
   bookingOptions = [
     { id: 'check-yes', value: 'yes', display: 'Yes' },
@@ -120,5 +122,18 @@ export class BookAppointmentsComponent {
   bookAppointment() {
     // Navigate to the booking-appointment-details route
     this.router.navigate(['/booking-appointment']);
+  }
+  viewMeetingDetails(appointment: any): void {
+    this.selectedAppointment = appointment;
+    this.showManagerDetails = true;
+    this.showVisitorDetails = true;
+  }
+  cancelDetails(): void {
+    // Reset the flags to hide manager and visitor details sections
+    this.showManagerDetails = false;
+    this.showVisitorDetails = false;
+  }
+  toggleDetails(appointment: any): void {
+    appointment.showDetails = !appointment.showDetails;
   }
 }

@@ -192,6 +192,7 @@ span.footer {
 
 /* Hover effect for buttons */
 .edit-button:hover,
+.cancel-detailsbutton,
 .delete-button:hover {
   background-color: #2980b9; /* Example hover background color */
 }
@@ -260,3 +261,38 @@ span.footer {
 }
 
 /* Add more styles as needed for other input fields or specific elements */
+.details-section {
+  margin: 20px;
+  border: 1px solid #ccc;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.manager-details,
+.visitor-details {
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.cancel-details-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.cancel-details-button {
+  padding: 10px 20px;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.cancel-details-button:hover {
+  background-color: #d32f2f;
+}

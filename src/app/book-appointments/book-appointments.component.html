@@ -29,20 +29,59 @@
           <h3>Book Appointment:{{ appointment.bookingAppointment }}</h3>
         </div>
         <div class="user-edit">
-          <!-- Call the editAppointment method on click -->
           <button class="edit-button" (click)="editAppointment(appointment)">
             Edit
           </button>
           <span class="footer">&copy; 2024. All rights reserved.</span>
-          <button
-            class="delete-button"
-            (click)="deleteMeetingDetails(appointment.id)"
-          >
-            Delete
+
+          <button class="edit-button" (click)="viewMeetingDetails(appointment)">
+            Details
           </button>
         </div>
       </div>
     </div>
+    <section
+      *ngIf="showManagerDetails || showVisitorDetails"
+      class="details-section"
+    >
+      <div class="grid-container">
+        <div class="manager-details" *ngIf="showManagerDetails">
+          <h2>Manager Details</h2>
+          <p><b>Manager ID:</b> {{ selectedAppointment.manager.managerId }}</p>
+          <p>
+            <b>Manager First Name:</b>
+            {{ selectedAppointment.manager.firstName }}
+          </p>
+          <p>
+            <b>Manager Last Name:</b> {{ selectedAppointment.manager.lastName }}
+          </p>
+          <p><b>Email:</b> {{ selectedAppointment.manager.email }}</p>
+          <p><b>Phone:</b> {{ selectedAppointment.manager.phone }}</p>
+          <p><b>Gender:</b> {{ selectedAppointment.manager.gender }}</p>
+        </div>
+
+        <div class="visitor-details" *ngIf="showVisitorDetails">
+          <h2>Visitor Details</h2>
+          <p><b>Visitor ID:</b> {{ selectedAppointment.visitor.visitorId }}</p>
+          <p>
+            <b>Visitor First Name:</b>
+            {{ selectedAppointment.visitor.firstName }}
+          </p>
+          <p>
+            <b>Visitor Last Name:</b> {{ selectedAppointment.visitor.lastName }}
+          </p>
+          <p><b>Email:</b> {{ selectedAppointment.visitor.email }}</p>
+          <p><b>Phone:</b> {{ selectedAppointment.visitor.phone }}</p>
+          <p><b>Gender:</b> {{ selectedAppointment.visitor.gender }}</p>
+        </div>
+      </div>
+
+      <div class="cancel-details-container">
+        <button class="cancel-details-button" (click)="cancelDetails()">
+          Cancel
+        </button>
+      </div>
+    </section>
 
     <!-- Display edit form only for the selected appointment -->
     <div *ngIf="appointment.isEditing" class="edit-form">
@@ -51,19 +90,12 @@
       <input
         type="text"
         id="editManagerFirstname"
-        [ngModel]="
-          appointment.manager.firstName + ' ' + appointment.manager.lastName
-        "
+        [ngModel]="appointment.manager.firstName"
         required
         #managerFirstname="ngModel"
         [min]="minDate"
       />
-      <div
-        *ngIf="
-          managerFirstname.invalid &&
-          (managerFirstname.dirty || managerFirstname.touched)
-        "
-      >
+      <div *ngIf="managerFirstname.invalid && managerFirstname.dirty">
         <small *ngIf="managerFirstname.errors['required']">
           * Manager First Name is required!
         </small>
@@ -73,18 +105,12 @@
       <input
         type="text"
         id="editVisitorFirstname"
-        [(ngModel)]="
-          appointment.visitor.firstName + ' ' + appointment.visitor.lastName
-        "
+        [(ngModel)]="appointment.visitor.firstName"
         required
         #visitorFirstname="ngModel"
       />
       <div>
-        <small
-          *ngIf="
-            visitorFirstname.invalid &&
-            (visitorFirstname.dirty || visitorFirstname.touched)
-          "
+        <small *ngIf="visitorFirstname.invalid && visitorFirstname.dirty"
           >visitorFirstName is required.</small
         >
       </div>
@@ -125,11 +151,10 @@
       />
 
       <div class="user-edit">
-        <!-- Call the updateAppointment method on click -->
         <button class="update-button" (click)="updateAppointment(appointment)">
           Update
         </button>
-        <!-- Call the cancelEditing method on click -->
+
         <button class="cancel-button" (click)="cancelEditing(appointment)">
           Cancel
         </button>
