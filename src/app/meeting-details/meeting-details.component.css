@@ -19,7 +19,7 @@
 }
 .form .input-box {
   width: 100%;
-  margin-top: 5px;
+  margin-top: 2rem;
 }
 .form .textarea {
   width: 100%;
@@ -28,15 +28,15 @@
 .input-box label {
   color: #333;
 }
+
 .form :where(.input-box input, .select-box, .textarea) {
   position: relative;
   height: 50px;
   width: 100%;
-  margin-top: 5rem;
+  /* margin-top: 5rem; */
   outline: none;
   font-size: 1rem;
   color: #707070;
-  margin-top: 8px;
   border-radius: 6px;
   padding: 0 15px;
 }
@@ -188,49 +188,4 @@ span.footer {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-}
-
-.input-container {
-  display: flex;
-  gap: 30px;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.custom-input-box p-autoComplete {
-  flex: 1;
-}
-
-.custom-input-box p-autoComplete input {
-  height: 50px;
-  width: 100%;
-  outline: none;
-  font-size: 1rem;
-  color: #707070;
-  border-radius: 20px;
-  padding: 0 15px;
-  border: 2px solid #ccc;
-}
-
-.custom-input-box p-autoComplete .ui-autocomplete {
-  width: 100%;
-  background-color: #fff;
-  border-radius: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.custom-input-box p-autoComplete .ui-autocomplete .ui-autocomplete-panel {
-  border: none;
-}
-
-.custom-input-box p-autoComplete .ui-autocomplete .ui-autocomplete-item {
-  padding: 8px 15px;
-  cursor: pointer;
-}
-
-.custom-input-box
-  p-autoComplete
-  .ui-autocomplete
-  .ui-autocomplete-item.ui-state-highlight {
-  background-color: #c69be4;
 }

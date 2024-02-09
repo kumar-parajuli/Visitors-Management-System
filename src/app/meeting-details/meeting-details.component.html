@@ -13,7 +13,18 @@
           [minLength]="1"
           placeholder="ManagerUsername"
           [ngModelOptions]="{ standalone: true }"
+          name="ManagerName"
+          #ManagerName="ngModel"
+          class="ng-invalid ng-touched"
         ></p-autoComplete>
+        <div>
+          <small
+            *ngIf="ManagerName.invalid && ManagerName.touched"
+            class="error-message"
+          >
+            *ManagerUsername is a Required Field!
+          </small>
+        </div>
       </div>
 
       <div class="custom-input-box">

@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 /* You can add global styles to this file, and also import other style files */
-/* @import "primeng/resources/themes/lara-light-blue/theme.css"; */
-/* @import "primeng/resources/primeng.css"; */
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
 
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
 * {
@@ -19,10 +19,69 @@ body {
   /* color:#282c35; */
   background: #282c35;
 }
+/* //autocomplete style */
+.input-container {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.custom-input-box p-autoComplete {
+  flex: 1;
+}
+
+.custom-input-box p-autoComplete input {
+  height: 50px;
+  width: 100%;
+  outline: none;
+  font-size: 1rem;
+  color: #d7d4d4;
+  border-radius: 6px;
+  padding: 0 15px;
+  border: 2px solid #707070;
+}
+
+.custom-input-box p-autoComplete .ui-autocomplete {
+  width: 100%;
+
+  border-radius: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.custom-input-box p-autoComplete .ui-autocomplete .ui-autocomplete-panel {
+  border: none;
+}
+
+.custom-input-box p-autoComplete .ui-autocomplete .ui-autocomplete-item {
+  padding: 8px 15px;
+  cursor: pointer;
+}
+
+.custom-input-box
+  p-autoComplete
+  .ui-autocomplete
+  .ui-autocomplete-item.ui-state-highlight {
+  background-color: #c69be4;
+}
+
+.custom-input-box p-autoComplete .ui-autocomplete .ui-autocomplete-item {
+  padding: 8px 15px;
+  cursor: pointer;
+  /* background-color: #c9c2c2;
+  color: blue; */
+}
+.p-autocomplete-item {
+  cursor: pointer;
+  white-space: nowrap;
+  background-color: #c9c2c2;
+  position: relative;
+}
 .p-autocomplete-dd .p-autocomplete-input,
 .p-autocomplete-dd .p-autocomplete-multiple-container {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
+  width: 15rem;
   block-size: 3rem;
 }
 .custom-input-box .ui-autocomplete .ui-autocomplete-item {
@@ -39,4 +98,9 @@ body {
   background-color: #fff;
   border-radius: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.error-message {
+  color: red; /* Change text color to red */
+  font-size: 12px; /* Adjust font size */
+  margin-top: 5px; /* Add margin to separate from the input field */
 }
