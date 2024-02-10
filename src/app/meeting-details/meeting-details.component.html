@@ -3,7 +3,7 @@
   <form class="form" (ngSubmit)="addMeetingDetails()" #addMeeting="ngForm">
     <div class="input-container">
       <div class="custom-input-box">
-        <label for="ManagerUsername">ManagerUsername:</label>
+        <label for="ManagerUsername">Managername:</label>
         <p-autoComplete
           [(ngModel)]="selectedManager"
           [suggestions]="managerSuggestions"
@@ -14,21 +14,18 @@
           placeholder="ManagerUsername"
           [ngModelOptions]="{ standalone: true }"
           name="ManagerName"
-          #ManagerName="ngModel"
+          #mname="ngModel"
           class="ng-invalid ng-touched"
         ></p-autoComplete>
         <div>
-          <small
-            *ngIf="ManagerName.invalid && ManagerName.touched"
-            class="error-message"
-          >
+          <small *ngIf="mname.invalid && mname.touched" class="error-message">
             *ManagerUsername is a Required Field!
           </small>
         </div>
       </div>
 
       <div class="custom-input-box">
-        <label for="VisitorUsername">VisitorUsername:</label>
+        <label for="VisitorUsername">Visitorname:</label>
         <p-autoComplete
           [(ngModel)]="selectedVisitor"
           [suggestions]="visitorSuggestions"
@@ -110,14 +107,14 @@
         <div class="user-name">
           <h2>Meeting Details</h2>
         </div>
-        <p><b>ManagerUsername:</b> {{ meetingDetail.manager.firstName }}</p>
+        <p><b>Managername:</b> {{ meetingDetail.manager.firstName }}</p>
         <p
           *ngIf="
             meetingDetail.visitor !== null &&
             meetingDetail.visitor !== undefined
           "
         >
-          <b>VisitorUsername:</b> {{ meetingDetail.visitor.firstName }}
+          <b>Visitorname:</b> {{ meetingDetail.visitor.firstName }}
         </p>
         <p><b>Remarks:</b>{{ meetingDetail.remarks }}</p>
 

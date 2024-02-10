@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { VisitorService } from '../services/visitor.service';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-update-visitor',
   templateUrl: './update-visitor.component.html',
@@ -18,7 +19,8 @@ export class UpdateVisitorComponent {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private visitorService: VisitorService
+    private visitorService: VisitorService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -45,12 +47,13 @@ export class UpdateVisitorComponent {
         .updateVisitor(this.visitor.id, this.visitor)
         .subscribe(
           (updateVisitorr: any) => {
-            // Additional logic after updating a manager if needed
-            // For example, navigate back to the manager list
+            this.toastr.success('Visitor updated successfully!', 'Success');
+
             this.router.navigate(['/visitor-list']);
           },
           (error) => {
             console.error('Error updating visitor:', error);
+            this.toastr.error('Failed to update visitor!', 'Error');
           }
         );
     } else {

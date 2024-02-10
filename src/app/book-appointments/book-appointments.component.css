@@ -38,7 +38,7 @@
   margin-top: 8px;
   /* border: 1px solid #ddd; */
   border-radius: 6px;
-  padding: 0 15px;
+  padding: 10px 15px;
 }
 .input-box input:focus {
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
@@ -175,16 +175,16 @@ span.footer {
   color: #c9c2c9;
 }
 .user-edit {
-  display: flex; /* Use flexbox to align items in one line */
-  gap: 10px; /* Adjust the gap between buttons */
+  display: flex;
+  gap: 10px;
 }
 
 /* Styling for the buttons */
 .edit-button,
 .delete-button {
-  padding: 10px; /* Add padding for better visual appearance */
-  background-color: #d9381e; /* Example background color */
-  color: #c9c2c2; /* Example text color */
+  padding: 10px;
+  background-color: #d9381e;
+  color: #c9c2c2;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -194,7 +194,7 @@ span.footer {
 .edit-button:hover,
 .cancel-detailsbutton,
 .delete-button:hover {
-  background-color: #2980b9; /* Example hover background color */
+  background-color: #2980b9;
 }
 /* ///edit style */
 .edit-form {
@@ -247,17 +247,15 @@ span.footer {
   background-color: #dc3545;
 }
 .booking-appointment-edit-form {
-  /* Add your specific styles for the bookingAppointment edit form here */
-  background-color: #e6f7ff; /* Example background color */
+  /* Add your specific styles for the bookingAppointment edit */
+  background-color: #e6f7ff;
   padding: 15px;
   border-radius: 8px;
   margin-top: 10px;
-  /* Add more styles as needed */
 }
 
 .booking-appointment-edit-form h2 {
-  color: #007bff; /* Example text color */
-  /* Add more styles as needed */
+  color: #007bff;
 }
 
 /* Add more styles as needed for other input fields or specific elements */
@@ -291,6 +289,7 @@ span.footer {
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  margin-bottom: 1rem;
 }
 
 .cancel-details-button:hover {

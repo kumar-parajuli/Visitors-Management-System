@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { MeetingDetailsService } from '../services/meeting-details.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-update-meeting',
@@ -20,7 +21,8 @@ export class UpdateMeetingComponent {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private meetingDetailsService: MeetingDetailsService
+    private meetingDetailsService: MeetingDetailsService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -50,8 +52,10 @@ export class UpdateMeetingComponent {
         .updateMeetingDetails(this.meetingDetails.id, this.meetingDetails)
         .subscribe(
           () => {
-            // Additional logic after updating meeting details if needed
-            // For example, navigate back to the meeting details list
+            this.toastr.success(
+              'Meeting details updated successfully!',
+              'Success'
+            );
             this.router.navigate(['/meeting-details-list']);
           },
           (error) => {
@@ -64,7 +68,7 @@ export class UpdateMeetingComponent {
       );
     }
   }
-  
+
   cancelEdit() {
     // You can navigate back to the meeting details list or any other page
     this.router.navigate(['/meeting-details-list']);

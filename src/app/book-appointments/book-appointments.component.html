@@ -13,16 +13,14 @@
             appointment.manager !== null && appointment.manager !== undefined
           "
         >
-          <b>ManagerFirstName:</b> {{ appointment.manager.firstName }}
-          {{ appointment.manager.lastName }}
+          <b>Managername:</b> {{ appointment.manager.firstName }}
         </p>
         <p
           *ngIf="
             appointment.visitor !== null && appointment.visitor !== undefined
           "
         >
-          <b>VisitorFirstName:</b> {{ appointment.visitor.firstName }}
-          {{ appointment.visitor.lastName }}
+          <b>Visitorname:</b> {{ appointment.visitor.firstName }}
         </p>
         <p><b>Remarks:</b>{{ appointment.remarks }}</p>
         <div class="user-name">
@@ -33,51 +31,67 @@
             Edit
           </button>
           <span class="footer">&copy; 2024. All rights reserved.</span>
-
-          <button class="edit-button" (click)="viewMeetingDetails(appointment)">
+          <button class="edit-button" (click)="toggleDetails(appointment)">
             Details
           </button>
+
+          <!-- <button class="edit-button" (click)="viewMeetingDetails(appointment)">
+            Details
+          </button> -->
         </div>
       </div>
     </div>
-    <section
-      *ngIf="showManagerDetails || showVisitorDetails"
-      class="details-section"
-    >
+    <section *ngIf="appointment.showDetails" class="details-section">
       <div class="grid-container">
-        <div class="manager-details" *ngIf="showManagerDetails">
-          <h2>Manager Details</h2>
-          <p><b>Manager ID:</b> {{ selectedAppointment.manager.managerId }}</p>
+        <div class="manager-details" *ngIf="appointment.showDetails">
+          <div class="user-name">
+            <h2>Manager Details</h2>
+          </div>
+          <p><b>Manager ID:</b> {{ appointment.manager.id }}</p>
           <p>
             <b>Manager First Name:</b>
-            {{ selectedAppointment.manager.firstName }}
+            {{ appointment.manager.firstName }}
           </p>
           <p>
-            <b>Manager Last Name:</b> {{ selectedAppointment.manager.lastName }}
+            <b>Manager Last Name:</b>
+            {{ appointment.manager.lastName }}
           </p>
-          <p><b>Email:</b> {{ selectedAppointment.manager.email }}</p>
-          <p><b>Phone:</b> {{ selectedAppointment.manager.phone }}</p>
-          <p><b>Gender:</b> {{ selectedAppointment.manager.gender }}</p>
+          <p>
+            <b>Username:</b> {{ appointment.manager.firstName }}
+            {{ appointment.manager.lastName }}
+          </p>
+
+          <p><b>Email:</b> {{ appointment.manager.email }}</p>
+          <p><b>Phone:</b> {{ appointment.manager.phoneNumber }}</p>
+          <p><b>Gender:</b> {{ appointment.manager.gender }}</p>
         </div>
 
-        <div class="visitor-details" *ngIf="showVisitorDetails">
-          <h2>Visitor Details</h2>
-          <p><b>Visitor ID:</b> {{ selectedAppointment.visitor.visitorId }}</p>
+        <div class="visitor-details" *ngIf="appointment.visitor">
+          <div class="user-name">
+            <h2>Visitor Details</h2>
+          </div>
+          <p><b>Visitor ID:</b> {{ appointment.visitor.id }}</p>
           <p>
             <b>Visitor First Name:</b>
-            {{ selectedAppointment.visitor.firstName }}
+            {{ appointment.visitor.firstName }}
           </p>
+          <p><b>Visitor Last Name:</b> {{ appointment.visitor.lastName }}</p>
           <p>
-            <b>Visitor Last Name:</b> {{ selectedAppointment.visitor.lastName }}
+            <b>Username:</b> {{ appointment.visitor.firstNamel }}
+            {{ appointment.visitor.lastName }}
           </p>
-          <p><b>Email:</b> {{ selectedAppointment.visitor.email }}</p>
-          <p><b>Phone:</b> {{ selectedAppointment.visitor.phone }}</p>
-          <p><b>Gender:</b> {{ selectedAppointment.visitor.gender }}</p>
+
+          <p><b>Email:</b> {{ appointment.visitor.email }}</p>
+          <p><b>Phone:</b> {{ appointment.visitor.phoneNumber }}</p>
+          <p><b>Gender:</b> {{ appointment.visitor.gender }}</p>
         </div>
       </div>
 
       <div class="cancel-details-container">
-        <button class="cancel-details-button" (click)="cancelDetails()">
+        <button
+          class="cancel-details-button"
+          (click)="cancelDetails(appointment)"
+        >
           Cancel
         </button>
       </div>
@@ -94,8 +108,9 @@
         required
         #managerFirstname="ngModel"
         [min]="minDate"
+        [disabled]="true"
       />
-      <div *ngIf="managerFirstname.invalid && managerFirstname.dirty">
+      <div *ngIf="managerFirstname.invalid && managerFirstname.touched">
         <small *ngIf="managerFirstname.errors['required']">
           * Manager First Name is required!
         </small>
@@ -108,9 +123,10 @@
         [(ngModel)]="appointment.visitor.firstName"
         required
         #visitorFirstname="ngModel"
+        [disabled]="true"
       />
       <div>
-        <small *ngIf="visitorFirstname.invalid && visitorFirstname.dirty"
+        <small *ngIf="visitorFirstname.invalid && visitorFirstname.touched"
           >visitorFirstName is required.</small
         >
       </div>
@@ -123,7 +139,7 @@
         required
       />
       <div>
-        <small *ngIf="remarks.invalid && (remarks.dirty || remarks.touched)"
+        <small *ngIf="remarks.invalid && remarks.touched"
           >Remarks is required.</small
         >
       </div>
@@ -135,11 +151,7 @@
         #appointmentDate="ngModel"
       />
       <div>
-        <small
-          *ngIf="
-            appointmentDate.invalid &&
-            (appointmentDate.dirty || appointmentDate.touched)
-          "
+        <small *ngIf="appointmentDate.invalid && appointmentDate.touched"
           >AppointmentDate is required.</small
         >
       </div>

@@ -3,7 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-book-appointments',
   templateUrl: './book-appointments.component.html',
@@ -33,6 +33,7 @@ export class BookAppointmentsComponent {
   constructor(
     private http: HttpClient,
     private router: Router,
+    private toastr: ToastrService,
     private meetingDetailsService: MeetingDetailsService
   ) {
     this.minDate = new Date().toISOString().split('T')[0];
@@ -61,11 +62,14 @@ export class BookAppointmentsComponent {
     this.meetingDetailsService.addMeetingDetails(newBookAppointment).subscribe(
       (data) => {
         console.log('Meeting details added successfully:', data);
+        this.toastr.success('Meeting details added successfully!', 'Success');
+
         this.resetForm();
         this.fetchMeetingDetails();
       },
       (error) => {
         console.error('Error adding meeting details:', error);
+        this.toastr.error('Failed to add meeting details!', 'Error');
       }
     );
   }
@@ -96,10 +100,17 @@ export class BookAppointmentsComponent {
       .updateMeetingDetails(appointment.id, appointment)
       .subscribe(
         () => {
+          this.toastr.success(
+            'Meeting details updated successfully!',
+            'Success'
+          );
+
           this.fetchMeetingDetails();
         },
         (error) => {
           console.error('Error updating appointment details:', error);
+          console.error('Error updating appointment details:', error);
+          this.toastr.error('Failed to update meeting details!', 'Error');
         }
       );
 
@@ -128,10 +139,8 @@ export class BookAppointmentsComponent {
     this.showManagerDetails = true;
     this.showVisitorDetails = true;
   }
-  cancelDetails(): void {
-    // Reset the flags to hide manager and visitor details sections
-    this.showManagerDetails = false;
-    this.showVisitorDetails = false;
+  cancelDetails(appointment: any): void {
+    appointment.showDetails = false;
   }
   toggleDetails(appointment: any): void {
     appointment.showDetails = !appointment.showDetails;

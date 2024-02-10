@@ -6,6 +6,8 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { MeetingDetails } from '../services/meeting-details.service';
 import { PrimeNGConfig } from 'primeng/api';
+import { ToastrService } from 'ngx-toastr';
+
 @Component({
   selector: 'app-meeting-details',
   templateUrl: './meeting-details.component.html',
@@ -41,6 +43,7 @@ export class MeetingDetailsComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private router: Router,
+    private toastr: ToastrService,
 
     private meetingDetailsService: MeetingDetailsService,
     private primengConfig: PrimeNGConfig
@@ -134,7 +137,7 @@ export class MeetingDetailsComponent implements OnInit {
   addMeetingDetails() {
     console.log('Selected Manager:', this.selectedManager);
     console.log('Selected Visitor:', this.selectedVisitor);
-
+    this.toastr.error('Please select both manager and visitor.', 'Error');
     if (!this.selectedManager) {
       console.error('Manager is not selected.');
       return;
@@ -159,12 +162,13 @@ export class MeetingDetailsComponent implements OnInit {
 
     this.meetingDetailsService.addMeetingDetails(newMeetingDetails).subscribe(
       (data) => {
-        console.log('Meeting details added successfully:', data);
+        this.toastr.success('Meeting details added successfully!', 'Success');
         this.resetForm();
         this.fetchMeetingDetails();
       },
       (error) => {
         console.error('Error adding meeting details:', error);
+        this.toastr.error('Failed to add meeting details.', 'Error');
       }
     );
   }
@@ -176,10 +180,13 @@ export class MeetingDetailsComponent implements OnInit {
     console.log('Delete button clicked for meeting details with ID:', id);
     this.meetingDetailsService.deleteMeetingDetails(id).subscribe(
       () => {
+        this.toastr.success('Meeting details deleted successfully!', 'Success');
+
         this.fetchMeetingDetails();
       },
       (error) => {
         console.error('Error deleting meeting details: ', error);
+        this.toastr.error('Failed to delete meeting details.', 'Error');
       }
     );
   }

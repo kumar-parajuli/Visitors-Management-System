@@ -19,6 +19,9 @@ import { UpdateMeetingComponent } from './update-meeting/update-meeting.componen
 import { PrimeNGConfig } from 'primeng/api';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+4;
+import { ToastrModule } from 'ngx-toastr';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,9 +40,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     AutoCompleteModule,
     BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 3000, // Default timeOut duration (3 seconds)
+      positionClass: 'toast-top-right', // Default position (top-right)
+      preventDuplicates: true, // Prevent duplicate notifications
+    }),
   ],
   providers: [
-    // ManagerService,
+    ManagerService,
     VisitorService,
     MeetingDetailsService,
     BookingAppointmentService,

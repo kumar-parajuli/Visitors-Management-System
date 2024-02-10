@@ -4,7 +4,7 @@ import { NgForm } from '@angular/forms';
 import { ManagerService } from '../services/manager.service'; // Adjust the path based on your actual folder structure
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-manager-list',
   templateUrl: './manager-list.component.html',
@@ -34,7 +34,8 @@ export class ManagerListComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private managerService: ManagerService
+    private managerService: ManagerService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -57,17 +58,28 @@ export class ManagerListComponent implements OnInit {
       gender: this.gender,
     };
 
-    this.managerService.addManager(newManager).subscribe(() => {
-      this.fetchManagers();
-      this.resetForm();
-    });
+    this.managerService.addManager(newManager).subscribe(
+      () => {
+        this.toastr.success('Manager added successfully!', 'Success');
+        this.fetchManagers();
+        this.resetForm();
+      },
+      (error) => {
+        this.toastr.error('Failed to add manager!', 'Error'); // Show error message
+      }
+    );
   }
 
   updateManager(manager: any) {
-    this.managerService.updateManager(manager.id, manager).subscribe(() => {
-      this.fetchManagers();
-      // Additional logic after updating a manager if needed
-    });
+    this.managerService.updateManager(manager.id, manager).subscribe(
+      () => {
+        this.fetchManagers();
+        this.toastr.success('Manager updated successfully!', 'Success'); // Show success message
+      },
+      (error) => {
+        this.toastr.error('Failed to update manager!', 'Error'); // Show error message
+      }
+    );
   }
 
   editManager(manager: any): void {
@@ -80,10 +92,16 @@ export class ManagerListComponent implements OnInit {
     }
   }
   deleteManagerById(managerId: number) {
-    this.managerService.deleteManager(managerId.toString()).subscribe(() => {
-      this.fetchManagers();
-      this.resetForm();
-    });
+    this.managerService.deleteManager(managerId.toString()).subscribe(
+      () => {
+        this.fetchManagers();
+        this.resetForm();
+        this.toastr.success('Manager deleted successfully!', 'Success'); // Show success message
+      },
+      (error) => {
+        this.toastr.error('Failed to delete manager!', 'Error'); // Show error message
+      }
+    );
   }
 
   resetForm() {

@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 import { VisitorService } from '../services/visitor.service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-visitor-form',
@@ -31,7 +32,8 @@ export class VisitorFormComponent implements OnInit {
     private http: HttpClient,
     private router: Router,
 
-    private visitorService: VisitorService
+    private visitorService: VisitorService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -57,14 +59,25 @@ export class VisitorFormComponent implements OnInit {
     this.visitorService.addVisitor(newVisitor).subscribe(() => {
       this.fetchVisitors();
       this.resetForm();
+     this.toastr.success('Visitor added successfully!', 'Success');
+    }, (error) => {
+      console.error('Error adding visitor:', error);
+      this.toastr.error('Failed to add visitor!', 'Error');
     });
   }
 
   updateVisitor(visitor: any) {
-    this.visitorService.updateVisitor(visitor.id, visitor).subscribe(() => {
-      this.fetchVisitors();
-      // Additional logic after updating a manager if needed
-    });
+    this.visitorService.updateVisitor(visitor.id, visitor).subscribe(
+      () => {
+        this.fetchVisitors();
+        this.toastr.success('Visitor updated successfully!', 'Success');
+        // Additional logic after updating a visitor if needed
+      },
+      (error) => {
+        console.error('Error updating visitor:', error);
+        this.toastr.error('Failed to update visitor!', 'Error');
+      }
+    );
   }
 
   editVisitor(visitor: any): void {
