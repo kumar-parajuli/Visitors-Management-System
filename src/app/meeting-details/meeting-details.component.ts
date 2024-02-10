@@ -137,14 +137,16 @@ export class MeetingDetailsComponent implements OnInit {
   addMeetingDetails() {
     console.log('Selected Manager:', this.selectedManager);
     console.log('Selected Visitor:', this.selectedVisitor);
-    this.toastr.error('Please select both manager and visitor.', 'Error');
     if (!this.selectedManager) {
       console.error('Manager is not selected.');
+      this.toastr.error('Please select both manager and visitor.', 'Error');
       return;
     }
 
     if (!this.selectedVisitor) {
       console.error('Visitor is not selected.');
+      this.toastr.error('Please select both manager and visitor.', 'Error');
+
       return;
     }
 
@@ -176,7 +178,6 @@ export class MeetingDetailsComponent implements OnInit {
     this.router.navigate(['/update-meeting', meetingId]);
   }
   deleteMeetingDetails(id: number): void {
-    // Implement delete meeting logic
     console.log('Delete button clicked for meeting details with ID:', id);
     this.meetingDetailsService.deleteMeetingDetails(id).subscribe(
       () => {
