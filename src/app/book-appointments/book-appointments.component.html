@@ -47,7 +47,7 @@
           <div class="user-name">
             <h2>Manager Details</h2>
           </div>
-          <p><b>Manager ID:</b> {{ appointment.manager.id }}</p>
+          <p><b>Manager Id:</b> {{ appointment.manager.id }}</p>
           <p>
             <b>Manager First Name:</b>
             {{ appointment.manager.firstName }}
@@ -70,7 +70,7 @@
           <div class="user-name">
             <h2>Visitor Details</h2>
           </div>
-          <p><b>Visitor ID:</b> {{ appointment.visitor.id }}</p>
+          <p><b>Visitor Id:</b> {{ appointment.visitor.id }}</p>
           <p>
             <b>Visitor First Name:</b>
             {{ appointment.visitor.firstName }}
@@ -106,12 +106,12 @@
         id="editManagerFirstname"
         [ngModel]="appointment.manager.firstName"
         required
-        #managerFirstname="ngModel"
+        #mname="ngModel"
         [min]="minDate"
         [disabled]="true"
       />
-      <div *ngIf="managerFirstname.invalid && managerFirstname.touched">
-        <small *ngIf="managerFirstname.errors['required']">
+      <div>
+        <small *ngIf="mname.invalid && mname.touched">
           * Manager First Name is required!
         </small>
       </div>
@@ -122,11 +122,11 @@
         id="editVisitorFirstname"
         [(ngModel)]="appointment.visitor.firstName"
         required
-        #visitorFirstname="ngModel"
+        #vname="ngModel"
         [disabled]="true"
       />
       <div>
-        <small *ngIf="visitorFirstname.invalid && visitorFirstname.touched"
+        <small *ngIf="vname.invalid && vname.touched"
           >visitorFirstName is required.</small
         >
       </div>
@@ -135,11 +135,11 @@
         type="text"
         id="editRemarks"
         [(ngModel)]="appointment.remarks"
-        #remarks="ngModel"
+        #remarksname="ngModel"
         required
       />
       <div>
-        <small *ngIf="remarks.invalid && remarks.touched"
+        <small *ngIf="remarksname.invalid && remarksname.touched"
           >Remarks is required.</small
         >
       </div>
@@ -148,10 +148,11 @@
         type="date"
         id="editAppointmentDate"
         [(ngModel)]="appointment.appointmentDate"
-        #appointmentDate="ngModel"
+        #aname="ngModel"
+        [min]="minDate"
       />
       <div>
-        <small *ngIf="appointmentDate.invalid && appointmentDate.touched"
+        <small *ngIf="aname.invalid && aname.touched"
           >AppointmentDate is required.</small
         >
       </div>

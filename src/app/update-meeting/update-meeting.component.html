@@ -4,25 +4,37 @@
   <form class="form" (ngSubmit)="updateMeetingDetails()" #updateForm="ngForm">
     <!-- Use [(ngModel)] to bind to the properties of meetingDetails -->
     <div class="input-box">
-      <label for="managerId">Manager ID:</label>
+      <label for="managerId">Manager Name:</label>
       <input
         type="text"
         id="managerId"
         name="managerId"
         [(ngModel)]="meetingDetails.manager.firstName"
+        #fname="ngModel"
         required
       />
+      <div>
+        <small *ngIf="fname.invalid && fname.touched"
+          >*Manager Name is a Required Field</small
+        >
+      </div>
     </div>
 
     <div class="input-box">
-      <label for="visitorId">Visitor ID:</label>
+      <label for="visitorId">Visitor Name:</label>
       <input
         type="text"
         id="visitorId"
         name="visitorId"
         [(ngModel)]="meetingDetails.visitor.firstName"
         required
+        #vname="ngModel"
       />
+      <div>
+        <small *ngIf="vname.invalid && vname.touched"
+          >*Visitor Name is a Required Field</small
+        >
+      </div>
     </div>
 
     <div class="input-box">
@@ -32,8 +44,15 @@
         id="appointmentDate"
         name="appointmentDate"
         [(ngModel)]="meetingDetails.appointmentDate"
+        #aname="ngModel"
         required
+        [min]="minDate"
       />
+      <div>
+        <small *ngIf="aname.invalid && aname.touched">
+          *Appointment Date is a Required Field!
+        </small>
+      </div>
     </div>
 
     <div class="input-box">
@@ -46,7 +65,13 @@
         cols="50"
         [(ngModel)]="meetingDetails.remarks"
         required
+        #rname="ngModel"
       ></textarea>
+      <div>
+        <small *ngIf="rname.invalid && rname.touched"
+          >* Remarks is a Required Field!
+        </small>
+      </div>
     </div>
 
     <div class="gender-box">

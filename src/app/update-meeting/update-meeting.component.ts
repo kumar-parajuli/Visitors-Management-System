@@ -12,6 +12,8 @@ import { ToastrService } from 'ngx-toastr';
 export class UpdateMeetingComponent {
   meetingId: number;
   meetingDetails: any;
+  minDate: string;
+
   bookings = [
     { id: 'check-yes', value: 'yes', display: 'Yes' },
     { id: 'check-no', value: 'no', display: 'No' },
@@ -23,7 +25,9 @@ export class UpdateMeetingComponent {
     private router: Router,
     private meetingDetailsService: MeetingDetailsService,
     private toastr: ToastrService
-  ) {}
+  ) {
+    this.minDate = new Date().toISOString().split('T')[0];
+  }
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {

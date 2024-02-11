@@ -35,7 +35,7 @@ body {
   width: 100%;
   outline: none;
   font-size: 1rem;
-  color: #d7d4d4;
+  color: #242323;
   border-radius: 6px;
   padding: 0 15px;
   border: 2px solid #707070;
@@ -99,11 +99,6 @@ body {
   border-radius: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-.error-message {
-  color: red;
-  font-size: 12px;
-  margin-top: 5px;
-}
 .p-button {
   color: #ffffff;
   background: #ef3f3f;
@@ -113,4 +108,19 @@ body {
   transition: background-color 0.2s, color 0.2s, border-color 0.2s,
     box-shadow 0.2s;
   border-radius: 6px;
+}
+/* Remove default focus outline for input field */
+.input-container .custom-input-box input {
+  outline: none !important;
+  border: 2px solid #a19191;
+}
+.input-container .custom-input-box input.ng-invalid.ng-touched,
+.input-container .custom-input-box input.ng-invalid.ng-touched:focus {
+  border: 2px solid red;
+}
+
+.input-container .custom-input-box small {
+  color: red;
+  font-weight: bold;
+  display: block;
 }
